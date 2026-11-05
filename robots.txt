@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pranavsaiseelam25-alt.github.io/sitemap.xml
