@@ -15,7 +15,7 @@
 :root {
   color-scheme: dark;
   --bg: #06080f;
-  --panel: rgba(255, 255, 255, .035);
+  --panel: rgba(13, 17, 28, .62);
   --panel-solid: #0d111c;
   --line: rgba(255, 255, 255, .11);
   --fg: #f3f5fa;
@@ -63,7 +63,33 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-of
 }
 .muted { color: var(--muted); }
 
-/* Stage */
+/* Stage: a painted universe sits furthest back, the cube floats in front of it */
+#space { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+#space-parallax { position: absolute; top: 0; left: 0; width: 100%; height: 140vh; }
+.space-drift { position: absolute; inset: 0; animation: drift 150s ease-in-out infinite alternate; }
+.space-drift canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.twinkle { animation: twinkle 4.6s ease-in-out infinite alternate; }
+#twinkle-b { animation-delay: -2.3s; animation-duration: 6.2s; }
+.meteor {
+  position: absolute;
+  top: 14%;
+  left: 72%;
+  width: 150px;
+  height: 1.5px;
+  opacity: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0));
+  transform: rotate(-24deg);
+  animation: meteor 19s linear infinite 5s;
+}
+@keyframes drift { to { transform: scale(1.07) translateX(-1.5%); } }
+@keyframes twinkle { from { opacity: .2; } to { opacity: 1; } }
+@keyframes meteor {
+  0% { opacity: 0; transform: rotate(-24deg) translateX(0); }
+  1% { opacity: .9; }
+  5% { opacity: 0; transform: rotate(-24deg) translateX(-520px); }
+  100% { opacity: 0; transform: rotate(-24deg) translateX(-520px); }
+}
 #gl { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 .glow {
   position: fixed;
@@ -71,7 +97,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-of
   z-index: 0;
   pointer-events: none;
   background-color: var(--blue);
-  opacity: .17;
+  opacity: .1;
   transition: background-color 1s var(--ease);
   -webkit-mask-image: radial-gradient(60% 55% at 70% 38%, #000, transparent);
   mask-image: radial-gradient(60% 55% at 70% 38%, #000, transparent);
@@ -124,7 +150,7 @@ body::before {
 }
 .hero-text { display: grid; gap: 1.75rem; max-width: 46rem; position: relative; z-index: 2; pointer-events: none; }
 h1 {
-  font-size: clamp(2.75rem, 8.6vw, 7.25rem);
+  font-size: clamp(2.75rem, 8.6vw, 6.5rem);
   font-weight: 600;
   line-height: .98;
   letter-spacing: -.045em;
@@ -208,6 +234,8 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
   overflow: clip;
   padding: 1.75rem;
   background: var(--panel);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--line);
   border-radius: 20px;
   transition: border-color .3s, transform .4s var(--ease);
@@ -231,6 +259,8 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .tile { display: grid; gap: .5rem; align-content: start; }
 .tile p { color: var(--muted); }
 .principles { margin-top: clamp(3rem, 6vw, 4.5rem); }
+
+.statement, .prose, .academics-copy, .thesis, .sec-head, .contact-list { text-shadow: 0 1px 14px rgba(4, 5, 12, .85), 0 0 2px rgba(4, 5, 12, .6); }
 
 /* Numbers */
 .num { font-size: clamp(3rem, 6vw, 4.75rem); font-weight: 500; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
@@ -275,6 +305,10 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .bullets li { position: relative; padding-left: 1rem; }
 .bullets li::before { content: ""; position: absolute; left: 0; top: .6em; width: 5px; height: 5px; border-radius: 50%; background: var(--pc); }
 .pull { font-size: clamp(1.25rem, 2.2vw, 1.5rem); font-weight: 500; line-height: 1.25; letter-spacing: -.02em; color: var(--pc); }
+.ledger { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; padding-top: 1.125rem; border-top: 1px solid var(--line); }
+.ledger > div, .next { display: grid; gap: .625rem; align-content: start; min-width: 0; }
+.next { padding-top: 1.125rem; border-top: 1px solid var(--line); }
+.ledger-open li::before { background: transparent; border: 1px solid var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: .375rem; }
 .chips li { padding: .2em .65em; font-family: var(--mono); font-size: .75rem; line-height: 1.4; color: #cdd3e2; border: 1px solid var(--line); border-radius: 999px; }
 .principles-line { display: grid; gap: .375rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .9375rem; line-height: 1.45; color: #cdd3e2; }
@@ -284,7 +318,7 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .academics-copy { max-width: 44rem; font-size: clamp(1.25rem, 2.2vw, 1.625rem); line-height: 1.35; letter-spacing: -.015em; color: #d7dcea; margin-bottom: 2.5rem; }
 
 /* Plan: one wide timeline, moved sideways by scrolling on large screens */
-.plan-sec { background: var(--panel-solid); border-block: 1px solid var(--line); position: relative; z-index: 1; }
+.plan-sec { background: rgba(9, 12, 22, .78); border-block: 1px solid var(--line); position: relative; z-index: 1; }
 .plan-pin { padding-block: clamp(4rem, 8vw, 6rem); overflow: clip; }
 .plan-pin.pinned { display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-block: 4.5rem 2rem; }
 .plan-pin > .wrap { width: 100%; }
@@ -317,7 +351,7 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .contact-list a:hover { background-size: 100% 1px; }
 .tile a { color: var(--fg); }
 
-footer { overflow: clip; border-top: 1px solid var(--line); background: var(--bg); }
+footer { overflow: clip; border-top: 1px solid var(--line); background: rgba(6, 8, 15, .72); }
 footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
 .mega {
   font-size: clamp(2.5rem, 9.4vw, 8.5rem);
@@ -337,10 +371,12 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
   .hero-gap { height: 74vw; max-height: 26rem; }
   #drag { top: auto; left: 0; right: 0; width: 100%; bottom: auto; height: 74vw; max-height: 26rem; }
   .cube-ui { position: static; justify-content: center; flex-wrap: wrap; }
+  .cube-ui .label { flex-basis: 100%; text-align: center; }
   .facts, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid3 { grid-template-columns: minmax(0, 1fr); }
   .projects { width: 100%; gap: 1.25rem; padding-bottom: 0; }
   .project { padding: 1.5rem; }
+  .card { background: rgba(13, 17, 28, .84); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .plan-scroll { overflow: visible; }
   .plan-track { flex-direction: column; width: auto; padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px)); }
   .stage { width: 100%; padding: 1.5rem; }
@@ -349,18 +385,28 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
   .hero-gap { display: none; }
 }
 @media (max-width: 560px) {
-  .grid2, .split { grid-template-columns: minmax(0, 1fr); }
+  .grid2, .split, .ledger { grid-template-columns: minmax(0, 1fr); }
   .contact-list > div { grid-template-columns: minmax(0, 1fr); gap: .125rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ticker-run, .status::before { animation: none; }
+  .ticker-run, .status::before, .space-drift, .twinkle { animation: none; }
+  .meteor { display: none; }
 }
 </style>
 </head>
 <body>
-
-<canvas id="gl" aria-hidden="true" hidden></canvas>
+<div id="space" aria-hidden="true">
+  <div id="space-parallax">
+    <div class="space-drift">
+      <canvas id="sky"></canvas>
+      <canvas id="twinkle-a" class="twinkle"></canvas>
+      <canvas id="twinkle-b" class="twinkle"></canvas>
+    </div>
+  </div>
+  <span class="meteor"></span>
+</div>
 <div class="glow" id="glow" aria-hidden="true"></div>
+<canvas id="gl" aria-hidden="true" hidden></canvas>
 
 <div class="bar">
   <div class="wrap">
@@ -475,7 +521,6 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
                 <li>Phase 5: real web search and citation-backed reports</li>
                 <li>Phase 6: agentic work, running multi-step tasks across apps and verifying the results</li>
                 <li>Phase 7: consent-based location sharing and mobile integration</li>
-                <li>Also planned: Companion Mode, an optional warm and supportive conversational style</li>
               </ul>
             </div>
           </div>
@@ -528,30 +573,54 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         <article class="card project" data-color="red" style="--pc: var(--red)">
           <div class="project-head">
             <h3>NeuroCube</h3>
-            <span class="status">Research framework in development</span>
+            <span class="status">Early-stage research</span>
           </div>
-          <p class="label">Cubing · Rehabilitation research · Leadership</p>
-          <p class="purpose">I started NeuroCube to help people with cubing, something I know well and like. We're exploring how Rubik's Cube-based activities relate to cognitive-motor coordination, and whether they could be useful in neurological rehabilitation research. Areas of interest include focal hand dystonia, stroke rehabilitation, multiple sclerosis and dementia-related challenges.</p>
-          <div class="split">
+          <p class="label">Founder and chief project director · Under Ignite Youth Community (IYC)</p>
+          <p class="purpose">I started NeuroCube to help people with cubing, something I know well and like. It has grown into an exploratory research initiative. We want to investigate whether structured Rubik's Cube-based activities and other cognitive-motor exercises could be complementary tools in neurological rehabilitation research, including focal hand dystonia, stroke-related motor impairments, multiple sclerosis and dementia-related challenges.</p>
+          <ul class="chips" aria-label="Areas of focus"><li>Cognitive-motor coordination</li><li>Cognitive neuroscience</li><li>Rehabilitation research</li><li>Activity design</li><li>Interdisciplinary collaboration</li></ul>
+          <div class="principles-line">
+            <p class="label">Research question</p>
+            <p>How do structured, progressively challenging Rubik's Cube-based activities engage fine-motor coordination, visuomotor integration and executive functions, and what is their potential relevance to complementary cognitive-motor rehabilitation research?</p>
+          </div>
+          <div class="ledger">
             <div>
-              <p class="label">Where it stands</p>
+              <p class="label">Established</p>
               <ul class="bullets">
-                <li>About 50 people work on NeuroCube</li>
-                <li>As founder and chief project director, I manage the team and lead negotiations</li>
-                <li>Pursuing collaborations with experts and established organizations such as Ignite Youth Community (IYC)</li>
-                <li>The research framework is still developing</li>
+                <li>Concept</li>
+                <li>Research direction</li>
+                <li>Core research interests</li>
+                <li>Project leadership, with about 50 people involved</li>
               </ul>
             </div>
             <div>
-              <p class="label">What's next</p>
+              <p class="label">In progress</p>
               <ul class="bullets">
-                <li>Literature reviews and specific, defensible research questions</li>
-                <li>Relationships with academics and healthcare professionals</li>
-                <li>An ethical framework and supervised research</li>
+                <li>Organisational structure</li>
+                <li>Research team recruitment and restructuring</li>
+                <li>Expert collaboration</li>
+              </ul>
+            </div>
+            <div>
+              <p class="label">Not done yet</p>
+              <ul class="bullets ledger-open">
+                <li>Validated exercise framework</li>
+                <li>Experimental research</li>
+                <li>Clinical validation</li>
+                <li>Demonstrated rehabilitation outcomes</li>
               </ul>
             </div>
           </div>
-          <p class="caution">NeuroCube's proposed activities are not clinically validated treatments.</p>
+          <div class="next">
+            <p class="label">What's next</p>
+            <ul class="bullets">
+              <li>A structured literature review, and specific questions with measurable hypotheses</li>
+              <li>A documented framework of progressive, adaptable activities</li>
+              <li>Guidance from neuroscientists, neurologists, occupational therapists and rehabilitation professionals</li>
+              <li>Research documentation, assessment protocols, and ethical oversight for any future human-participant research</li>
+              <li>Clear team responsibilities and a sustainable project structure</li>
+            </ul>
+          </div>
+          <p class="caution">NeuroCube's proposed activities are not clinically validated treatments, and it has not demonstrated any rehabilitation outcomes.</p>
         </article>
 
         <article class="card project" data-color="orange" style="--pc: var(--orange)">
@@ -713,6 +782,146 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
   var hasGsap = !!(window.gsap && window.ScrollTrigger);
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
+  /* The universe: painted once, seeded so it looks the same on every visit */
+  function seeded(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function puff(ctx, x, y, r, rgb, alpha) {
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, 'rgba(' + rgb + ',' + alpha + ')');
+    g.addColorStop(.5, 'rgba(' + rgb + ',' + alpha * .35 + ')');
+    g.addColorStop(1, 'rgba(' + rgb + ',0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  function star(ctx, x, y, r, rgb, alpha) {
+    ctx.fillStyle = 'rgba(' + rgb + ',' + alpha + ')';
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  var STARS = ['255,255,255', '205,220,255', '170,195,255', '255,232,205', '255,205,170'];
+  function paintSky() {
+    var w = innerWidth, h = Math.round(innerHeight * 1.4), big = Math.max(w, h);
+    var dpr = Math.min(devicePixelRatio || 1, 2), rnd = seeded(2026);
+    var sky = $('sky'), out = sky.getContext('2d');
+    sky.width = w * dpr; sky.height = h * dpr;
+    out.scale(dpr, dpr);
+
+    /* Gas is painted small and scaled up, which keeps it soft and free of banding */
+    var gas = document.createElement('canvas');
+    gas.width = Math.ceil(w / 4); gas.height = Math.ceil(h / 4);
+    var ctx = gas.getContext('2d');
+    ctx.scale(.25, .25);
+
+    var base = ctx.createLinearGradient(0, 0, w, h);
+    base.addColorStop(0, '#04050d');
+    base.addColorStop(.5, '#070a1b');
+    base.addColorStop(1, '#04040b');
+    ctx.fillStyle = base;
+    ctx.fillRect(0, 0, w, h);
+
+    /* The galactic band runs corner to corner, with coloured gas around it */
+    ctx.globalCompositeOperation = 'lighter';
+    var GAS = ['52,74,214', '112,58,196', '26,120,170', '178,50,140', '70,60,190'];
+    for (var i = 0; i < 170; i++) {
+      var t = rnd(), off = (rnd() - .5) * .34;
+      var bx = (-.1 + t * 1.2) * w + off * h * .55, by = (.92 - t * .84) * h + off * h;
+      puff(ctx, bx, by, big * (.05 + rnd() * .15), GAS[Math.floor(rnd() * GAS.length)], .018 + rnd() * .03);
+    }
+    for (var c = 0; c < 46; c++) {
+      var u = .3 + rnd() * .4;
+      puff(ctx, (-.1 + u * 1.2) * w, (.92 - u * .84) * h, big * (.04 + rnd() * .09), '255,190,140', .012 + rnd() * .018);
+    }
+    [[.78, .2, '96,70,220'], [.12, .55, '190,50,130'], [.86, .78, '30,130,175']].forEach(function (n) {
+      for (var k = 0; k < 34; k++) {
+        puff(ctx, (n[0] + (rnd() - .5) * .3) * w, (n[1] + (rnd() - .5) * .28) * h, big * (.04 + rnd() * .12), n[2], .014 + rnd() * .024);
+      }
+    });
+
+    /* Dark dust lanes through the band */
+    ctx.globalCompositeOperation = 'source-over';
+    for (var d = 0; d < 60; d++) {
+      var v = rnd(), wob = (rnd() - .5) * .1;
+      puff(ctx, (-.1 + v * 1.2) * w, (.92 - v * .84 + wob) * h, big * (.02 + rnd() * .06), '3,4,10', .05 + rnd() * .07);
+    }
+
+    /* A second, smaller pass averages away the fine pattern that stacked gradients leave */
+    var soft = document.createElement('canvas');
+    soft.width = Math.ceil(w / 12); soft.height = Math.ceil(h / 12);
+    var softCtx = soft.getContext('2d');
+    softCtx.imageSmoothingQuality = 'high';
+    softCtx.drawImage(gas, 0, 0, soft.width, soft.height);
+    out.imageSmoothingQuality = 'high';
+    out.drawImage(soft, 0, 0, w, h);
+    ctx = out;
+
+    /* Distant galaxies */
+    ctx.globalCompositeOperation = 'lighter';
+    [[.3, .1, .9, .022], [.9, .5, -.5, .016]].forEach(function (g) {
+      ctx.save();
+      ctx.translate(g[0] * w, g[1] * h);
+      ctx.rotate(g[2]);
+      ctx.scale(1, .34);
+      puff(ctx, 0, 0, big * g[3] * 2.2, '140,160,255', .12);
+      puff(ctx, 0, 0, big * g[3], '255,225,195', .34);
+      ctx.restore();
+    });
+
+    /* Stars, thicker along the band */
+    var small = w < 900;
+    var count = Math.min(2400, Math.round(w * h / (small ? 1100 : 620)));
+    for (var n = 0; n < count; n++) {
+      var x, y;
+      if (rnd() < .5) {
+        var q = rnd(), side = (rnd() + rnd() - 1) * .2;
+        x = (-.1 + q * 1.2) * w + side * h * .55;
+        y = (.92 - q * .84 + side) * h;
+      } else {
+        x = rnd() * w; y = rnd() * h;
+      }
+      var size = rnd();
+      star(ctx, x, y, .3 + size * size * .9, STARS[Math.floor(rnd() * STARS.length)], .25 + rnd() * .6);
+    }
+    for (var b = 0; b < 16; b++) {
+      var sx = rnd() * w, sy = rnd() * h, col = STARS[Math.floor(rnd() * STARS.length)];
+      puff(ctx, sx, sy, 7 + rnd() * 9, col, .32);
+      star(ctx, sx, sy, 1.1 + rnd() * .5, '255,255,255', 1);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+
+    /* Text sits right on top of the sky on phones, so it stays much quieter there */
+    if (small) {
+      ctx.fillStyle = 'rgba(4, 5, 12, .58)';
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    ['twinkle-a', 'twinkle-b'].forEach(function (id) {
+      var layer = $(id), tc = layer.getContext('2d');
+      layer.width = w * dpr; layer.height = h * dpr;
+      tc.scale(dpr, dpr);
+      for (var m = 0; m < (small ? 18 : 70); m++) {
+        var tx = rnd() * w, ty = rnd() * h, tcol = STARS[Math.floor(rnd() * STARS.length)];
+        puff(tc, tx, ty, 3 + rnd() * 3, tcol, .4);
+        star(tc, tx, ty, .7 + rnd() * .6, '255,255,255', .95);
+      }
+    });
+  }
+  var skyWidth = 0;
+  function sizeSky() {
+    /* Phones resize when the address bar hides, so only repaint for a real width change */
+    if (innerWidth === skyWidth) return;
+    skyWidth = innerWidth;
+    paintSky();
+  }
+  sizeSky();
+  addEventListener('resize', sizeSky);
+
   /* Cards follow the pointer */
   document.addEventListener('pointermove', function (e) {
     var card = e.target.closest && e.target.closest('.card');
@@ -746,7 +955,9 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
   }
   function onScroll() {
     var range = document.documentElement.scrollHeight - innerHeight;
-    $('progress').style.transform = 'scaleX(' + (range > 0 ? Math.min(1, scrollY / range) : 0) + ')';
+    var read = range > 0 ? Math.min(1, scrollY / range) : 0;
+    $('progress').style.transform = 'scaleX(' + read + ')';
+    if (!calm) $('space-parallax').style.transform = 'translateY(' + (-read * innerHeight * .36).toFixed(1) + 'px)';
     var current = -1;
     targets.forEach(function (t, i) { if (t.getBoundingClientRect().top <= 140) current = i; });
     if (range > 0 && scrollY >= range - 2) current = targets.length - 1;
@@ -777,8 +988,7 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
     canvas.hidden = false;
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
     renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    renderer.toneMapping = THREE.NoToneMapping;
 
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(32, 1, .1, 100);
@@ -798,25 +1008,13 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
     scene.environment = pmrem.fromScene(studio, .03).texture;
     pmrem.dispose();
 
-    var key = new THREE.DirectionalLight(0xffffff, 1.5);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x9098a8, .72));
+    var key = new THREE.DirectionalLight(0xffffff, .42);
     key.position.set(4, 7, 8);
     scene.add(key);
-    rim = new THREE.DirectionalLight(COLORS.blue, 2.4);
+    rim = new THREE.DirectionalLight(COLORS.blue, .3);
     rim.position.set(-7, -3, -4);
     scene.add(rim);
-
-    /* Stars in the background */
-    var count = innerWidth < 900 ? 220 : 520;
-    var starPos = new Float32Array(count * 3);
-    for (var i = 0; i < count; i++) {
-      starPos[i * 3] = (Math.random() - .5) * 34;
-      starPos[i * 3 + 1] = (Math.random() - .5) * 22;
-      starPos[i * 3 + 2] = -Math.random() * 16 - 2;
-    }
-    var starGeo = new THREE.BufferGeometry();
-    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-    var stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xbfd0ff, size: .035, transparent: true, opacity: .75, depthWrite: false }));
-    scene.add(stars);
 
     /* Rounded pieces */
     function roundedBox(size, radius, seg) {
@@ -835,28 +1033,52 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
       g.computeVertexNormals();
       return g;
     }
-    function roundedSquare(size, r) {
-      var h = size / 2, s = new THREE.Shape();
+    function tileGeometry(shape) {
+      return new THREE.ExtrudeGeometry(shape, { depth: .012, bevelEnabled: true, bevelThickness: .03, bevelSize: .025, bevelSegments: 4, curveSegments: 16 });
+    }
+    /* Tile shapes follow a modern speedcube: rounded-square centres, edges curved toward the centre,
+       corners softened on the inner side. Each shape points outward along +y (or +x +y). */
+    function centreTile() {
+      var h = .44, r = .32, s = new THREE.Shape();
       s.moveTo(-h + r, -h);
       s.lineTo(h - r, -h); s.quadraticCurveTo(h, -h, h, -h + r);
       s.lineTo(h, h - r); s.quadraticCurveTo(h, h, h - r, h);
       s.lineTo(-h + r, h); s.quadraticCurveTo(-h, h, -h, h - r);
       s.lineTo(-h, -h + r); s.quadraticCurveTo(-h, -h, -h + r, -h);
-      return new THREE.ShapeGeometry(s, 6);
+      return tileGeometry(s);
+    }
+    function edgeTile() {
+      var h = .465, r = .05, s = new THREE.Shape();
+      s.moveTo(-h + r, h);
+      s.lineTo(h - r, h); s.quadraticCurveTo(h, h, h, h - r);
+      s.lineTo(h, -.2);
+      s.quadraticCurveTo(h * .92, -h, 0, -h);
+      s.quadraticCurveTo(-h * .92, -h, -h, -.2);
+      s.lineTo(-h, h - r); s.quadraticCurveTo(-h, h, -h + r, h);
+      return tileGeometry(s);
+    }
+    function cornerTile() {
+      var h = .465, r = .05, big = .13, s = new THREE.Shape();
+      s.moveTo(-h + big, -h);
+      s.lineTo(h - r, -h); s.quadraticCurveTo(h, -h, h, -h + r);
+      s.lineTo(h, h - r); s.quadraticCurveTo(h, h, h - r, h);
+      s.lineTo(-h + r, h); s.quadraticCurveTo(-h, h, -h, h - r);
+      s.lineTo(-h, -h + big); s.quadraticCurveTo(-h, -h, -h + big, -h);
+      return tileGeometry(s);
     }
     var bodyGeo = roundedBox(.97, .1, 6);
-    var stickerGeo = roundedSquare(.8, .12);
-    var bodyMat = new THREE.MeshStandardMaterial({ color: 0x0c0e14, roughness: .34, metalness: .55 });
+    var tiles = { centre: centreTile(), edge: edgeTile(), corner: cornerTile() };
+    var bodyMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
     function sticker(hex) {
-      return new THREE.MeshPhysicalMaterial({ color: new THREE.Color(hex).convertSRGBToLinear(), roughness: .34, metalness: 0, clearcoat: .55, clearcoatRoughness: .25, envMapIntensity: .4 });
+      return new THREE.MeshStandardMaterial({ color: new THREE.Color(hex).convertSRGBToLinear(), roughness: .62, metalness: 0, envMapIntensity: .08 });
     }
     var FACES = [
-      { axis: 'z', sign: 1, hex: '#22b56b', ry: 0, rx: 0 },
-      { axis: 'z', sign: -1, hex: '#2f66ee', ry: Math.PI, rx: 0 },
-      { axis: 'x', sign: 1, hex: '#e23340', ry: Math.PI / 2, rx: 0 },
-      { axis: 'x', sign: -1, hex: '#f5841f', ry: -Math.PI / 2, rx: 0 },
-      { axis: 'y', sign: 1, hex: '#f2f4f8', ry: 0, rx: -Math.PI / 2 },
-      { axis: 'y', sign: -1, hex: '#ffd21f', ry: 0, rx: Math.PI / 2 }
+      { axis: 'z', sign: 1, hex: '#26d01b', ry: 0, rx: 0 },
+      { axis: 'z', sign: -1, hex: '#0062ff', ry: Math.PI, rx: 0 },
+      { axis: 'x', sign: 1, hex: '#f6222e', ry: Math.PI / 2, rx: 0 },
+      { axis: 'x', sign: -1, hex: '#ff6b00', ry: -Math.PI / 2, rx: 0 },
+      { axis: 'y', sign: 1, hex: '#ffffff', ry: 0, rx: -Math.PI / 2 },
+      { axis: 'y', sign: -1, hex: '#ffef00', ry: 0, rx: Math.PI / 2 }
     ];
     FACES.forEach(function (f) { f.mat = sticker(f.hex); });
 
@@ -872,9 +1094,15 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
           var at = { x: x, y: y, z: z };
           FACES.forEach(function (f) {
             if (at[f.axis] !== f.sign) return;
-            var m = new THREE.Mesh(stickerGeo, f.mat);
-            m.rotation.set(f.rx, f.ry, 0);
-            m.position[f.axis] = f.sign * .4875;
+            /* Where this tile sits on its face decides its shape and which way it points */
+            var euler = new THREE.Euler(f.rx, f.ry, 0);
+            var spot = new THREE.Vector3(x, y, z);
+            var a = Math.round(spot.dot(new THREE.Vector3(1, 0, 0).applyEuler(euler)));
+            var b = Math.round(spot.dot(new THREE.Vector3(0, 1, 0).applyEuler(euler)));
+            var geo = !a && !b ? tiles.centre : (a && b ? tiles.corner : tiles.edge);
+            var m = new THREE.Mesh(geo, f.mat);
+            m.rotation.set(f.rx, f.ry, a && b ? Math.atan2(b, a) - Math.PI / 4 : Math.atan2(-a, b));
+            m.position[f.axis] = f.sign * (!a && !b ? .482 : .47);
             g.add(m);
           });
           cube.add(g);
@@ -1008,10 +1236,15 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
       var vh = innerHeight, st = states();
       var top = function (el) { return el.getBoundingClientRect().top + scrollY; };
       var mid = function (el) { return top(el) + el.offsetHeight / 2 - vh / 2; };
+      if (innerWidth < 900) {
+        /* On phones the cube leaves with the opening, so it never sits behind text */
+        keys = [[0, st.hero], [vh * .6, Object.assign({}, st.hero, { y: st.hero.y + 1.2, o: 0, d: 0 })]];
+        return;
+      }
       var about = $('about'), list = projects;
       keys = [
         [0, st.hero],
-        [top(about) - vh * (innerWidth >= 900 ? .75 : 1.15), st.hero],
+        [top(about) - vh * .75, st.hero],
         [top(about) + about.offsetHeight * .42 - vh / 2, st.burst],
         [mid(list[0]) - vh * .25, st.sage],
         [mid(list[0]), st.sage],
@@ -1068,8 +1301,6 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         cube.scale.setScalar(Math.max(.001, rig.s));
         cube.rotation.set(rig.rx + user.y * rig.d + pointer.y * .06, rig.ry + yaw + user.x * rig.d + pointer.x * .1, 0);
         layout(rig.sp);
-        stars.rotation.y = now * .000012;
-        stars.position.y = scrollY * .0012;
         renderer.render(scene, camera);
       }
       if (!calm && !busy && history.length && scrollY > innerHeight * .55) solve();
