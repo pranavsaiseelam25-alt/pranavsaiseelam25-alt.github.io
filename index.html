@@ -274,6 +274,10 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .bullets { display: grid; gap: .5rem; font-size: .9375rem; line-height: 1.45; color: #cdd3e2; }
 .bullets li { position: relative; padding-left: 1rem; }
 .bullets li::before { content: ""; position: absolute; left: 0; top: .6em; width: 5px; height: 5px; border-radius: 50%; background: var(--pc); }
+.pull { font-size: clamp(1.25rem, 2.2vw, 1.5rem); font-weight: 500; line-height: 1.25; letter-spacing: -.02em; color: var(--pc); }
+.chips { display: flex; flex-wrap: wrap; gap: .375rem; }
+.chips li { padding: .2em .65em; font-family: var(--mono); font-size: .75rem; line-height: 1.4; color: #cdd3e2; border: 1px solid var(--line); border-radius: 999px; }
+.principles-line { display: grid; gap: .375rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .9375rem; line-height: 1.45; color: #cdd3e2; }
 .caution { font-size: .9375rem; color: var(--muted); padding-top: 1rem; border-top: 1px solid var(--line); }
 
 /* Academics */
@@ -412,7 +416,7 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
       <div class="sec-head"><h2 class="label">About me</h2></div>
       <p class="statement" id="statement">I enjoy learning new things and chasing unanswered questions. I often find myself questioning the fundamental laws of the universe and wanting to understand why they are the way they are.</p>
       <div class="prose">
-        <p>I want solutions to everything, and I often end up creating my own. VIVEKA began with my Sanskrit teacher, who was eager to learn English and get good at it but unsure how. SAGE began because I wanted to build something amazing: an AI that makes complex, repetitive, time-consuming tasks faster and runs completely locally, so it's truly a personal assistant. NeuroCube began with cubing, something I know well and like, and the wish to help people with it.</p>
+        <p>I want solutions to everything, and I often end up creating my own. VIVEKA began with wanting to help one person learn English. SAGE began because I wanted to build something amazing: an AI that makes complex, repetitive, time-consuming tasks faster and runs completely locally, so it's truly a personal assistant. NeuroCube began with cubing, something I know well and like, and the wish to help people with it.</p>
         <p>My interests span artificial intelligence, theoretical physics, mathematics and educational technology. I focus on a small number of substantial projects, and I want each one to end up finished, documented and useful to someone.</p>
         <p>Everything here is still in progress. On this page I separate what's done from what's under way and what's only planned, so you can see exactly where each project stands.</p>
       </div>
@@ -444,27 +448,40 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         <article class="card project" data-color="blue" style="--pc: var(--blue)">
           <div class="project-head">
             <h3>SAGE</h3>
-            <span class="status">In development</span>
+            <span class="status">Active development</span>
           </div>
-          <p class="label">Artificial intelligence · Software engineering</p>
-          <p class="purpose">A local-first personal AI environment that helps with information management, research, automation, memory and computer interaction.</p>
+          <p class="label">Self-Adaptive General Intelligence Engine · Independent project · Windows desktop</p>
+          <p class="purpose">A personal AI assistant that works as a single intelligent interface between you and your computer. SAGE shouldn't just explain how to do a task. It's being built to understand what you want, plan it, carry out authorized actions, and verify the result. It's an ambitious engineering project, not artificial general intelligence.</p>
+          <ul class="chips" aria-label="Technology used"><li>Python</li><li>FastAPI</li><li>React</li><li>TypeScript</li><li>pywebview</li><li>WebView2</li><li>Ollama</li><li>Qwen 2.5 3B</li><li>SQLite</li><li>nomic-embed-text</li></ul>
           <div class="split">
             <div>
               <p class="label">Where it stands</p>
               <ul class="bullets">
-                <li>Python backend and React and TypeScript frontend are in place</li>
-                <li>Working on desktop integration and local AI models</li>
-                <li>Implementing persistent memory and automation</li>
+                <li>Phase 1, the Skills Engine, is implemented and undergoing live verification</li>
+                <li>Working skills include natural-language routing, system diagnostics, volume control, and opening apps, files and approved websites</li>
+                <li>Actions need confirmation first, and they're audited and verified</li>
+                <li>Engineering work has improved routing reliability, stopped fabricated action-success messages, and kept file discovery inside approved directories</li>
+                <li>Latest development report: 303 automated tests passed and 28 skipped, including 40 new tests</li>
+                <li>Live verification of the latest fixes is a separate step and is still pending</li>
               </ul>
             </div>
             <div>
               <p class="label">What's next</p>
               <ul class="bullets">
-                <li>A stable core and complete memory architecture</li>
-                <li>More reliable and safer autonomous actions</li>
-                <li>Technical documentation and feedback from independent users</li>
+                <li>Phase 1: finish stabilizing the Skills Engine</li>
+                <li>Phase 2: voice, with a local wake phrase, speech recognition and spoken responses</li>
+                <li>Phase 3: practical skills such as PDFs, contacts and reminders</li>
+                <li>Phase 4: diagrams, schematics and data visualization</li>
+                <li>Phase 5: real web search and citation-backed reports</li>
+                <li>Phase 6: agentic work, running multi-step tasks across apps and verifying the results</li>
+                <li>Phase 7: consent-based location sharing and mobile integration</li>
+                <li>Also planned: Companion Mode, an optional warm and supportive conversational style</li>
               </ul>
             </div>
+          </div>
+          <div class="principles-line">
+            <p class="label">Engineering principles</p>
+            <p>Local-first, modular and transparent, with authorization required for consequential actions. It's designed for consumer-grade hardware and uses free, open-source tools with no paid API dependencies.</p>
           </div>
           <p class="label">Runs locally for now, so there's no public link yet</p>
         </article>
@@ -474,27 +491,38 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
             <h3>VIVEKA</h3>
             <span class="status">Early development</span>
           </div>
-          <p class="label">Educational technology · Entrepreneurship</p>
-          <p class="purpose">An adaptive app that teaches English through Indian regional languages, for people who find conventional English-learning platforms hard to use.</p>
+          <p class="label">Adaptive multilingual English learning · Educational technology · Entrepreneurship</p>
+          <p class="purpose">VIVEKA began with my Sanskrit teacher, Vivek, who wanted to become good at English but wasn't sure how to go about it. The app is named after him. Many people are in the same position: motivated, but without a structured path explained in a language they already understand. VIVEKA is being built to teach English through Indian regional languages, with Chinese as an additional language, and to adapt to what each learner already knows.</p>
+          <p class="pull">Language should not be a barrier to learning another language.</p>
+          <div class="principles-line">
+            <p class="label">Objective</p>
+            <p>Making English education adaptive to the learner, rather than expecting every learner to adapt to the same curriculum.</p>
+          </div>
+          <ul class="chips" aria-label="Technology used"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>SQLite</li></ul>
           <div class="split">
             <div>
               <p class="label">Where it stands</p>
               <ul class="bullets">
-                <li>Application concept established</li>
-                <li>Backend started in Python and FastAPI</li>
-                <li>Database and application architecture in development</li>
+                <li>Core objectives, proposed architecture and adaptive-learning approach are established</li>
+                <li>Project structure, development environment and backend stack are in place</li>
+                <li>Initial design of the multilingual language-support framework is done</li>
+                <li>Learner profiles, curriculum management and assessments are being planned</li>
+                <li>Foundational backend components are in development</li>
               </ul>
             </div>
             <div>
               <p class="label">What's next</p>
               <ul class="bullets">
-                <li>Core learning modules with native-language explanations</li>
-                <li>Adaptive learning and personalised feedback</li>
-                <li>Feedback from teachers and learners, and assessments of learning outcomes</li>
+                <li>A modular backend and the multilingual framework</li>
+                <li>Learner profiles that separate native, instruction and target languages</li>
+                <li>A curriculum from foundational to advanced, covering reading, writing, listening, speaking, grammar and vocabulary</li>
+                <li>Diagnostic assessments and an adaptive learning engine</li>
+                <li>An AI tutor that explains errors in the learner's preferred language</li>
+                <li>A learner-friendly frontend, then testing of educational effectiveness, language accuracy and accessibility</li>
               </ul>
             </div>
           </div>
-          <p class="label">Runs locally for now, so there's no public link yet</p>
+          <p class="label">Not yet a finished or publicly deployed product</p>
         </article>
 
         <article class="card project" data-color="red" style="--pc: var(--red)">
