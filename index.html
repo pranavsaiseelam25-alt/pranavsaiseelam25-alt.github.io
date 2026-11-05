@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Seelam Pranav Sai Royal, a Grade 10 student in Bangalore building SAGE, VIVEKA, NeuroCube and Vaxaliaa.">
+<style>body { margin: 0; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+<title>Seelam Pranav Sai Royal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one continuous dark stage. A lit 3D cube lives behind the page and travels with the story.
+   Each project owns a cube face, and that face's color becomes the light in the room. */
+:root {
+  color-scheme: dark;
+  --bg: #06080f;
+  --panel: rgba(255, 255, 255, .035);
+  --panel-solid: #0d111c;
+  --line: rgba(255, 255, 255, .11);
+  --fg: #f3f5fa;
+  --muted: #9aa4bb;
+  --blue: #5b8cff;
+  --green: #34d58a;
+  --red: #ff5a66;
+  --orange: #ff9a3d;
+  --yellow: #ffd94a;
+  --c: var(--blue);
+  --sans: "Geist", "Segoe UI", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, Consolas, monospace;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, dl, dd, ol, ul { margin: 0; padding: 0; }
+ol, ul { list-style: none; }
+h1, h2, h3 { text-wrap: balance; font-weight: 600; letter-spacing: -.025em; }
+a { color: inherit; text-underline-offset: 4px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.wrap {
+  position: relative;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.muted { color: var(--muted); }
+
+/* Stage */
+#gl { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--blue);
+  opacity: .17;
+  transition: background-color 1s var(--ease);
+  -webkit-mask-image: radial-gradient(60% 55% at 70% 38%, #000, transparent);
+  mask-image: radial-gradient(60% 55% at 70% 38%, #000, transparent);
+}
+main, header.hero, footer { position: relative; z-index: 1; }
+
+/* Navigation */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+}
+.bar {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: rgba(6, 8, 15, .62);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--line);
+}
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 3.5rem; }
+.mark { font-weight: 600; letter-spacing: -.01em; text-decoration: none; white-space: nowrap; }
+.bar nav { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.bar ul { display: flex; gap: 1.5rem; white-space: nowrap; }
+.bar nav a { font-size: .875rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+.bar nav a:hover, .bar nav a[aria-current] { color: var(--fg); }
+.progress {
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 1px;
+  background: var(--c);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* Opening */
+.hero { overflow: clip; }
+.hero .wrap {
+  display: grid;
+  align-content: end;
+  gap: 2.75rem;
+  min-height: min(100svh, 60rem);
+  padding-block: 7rem 2.5rem;
+}
+.hero-text { display: grid; gap: 1.75rem; max-width: 46rem; position: relative; z-index: 2; pointer-events: none; }
+h1 {
+  font-size: clamp(2.75rem, 8.6vw, 7.25rem);
+  font-weight: 600;
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+h1 .line { display: block; overflow: clip; padding-bottom: .08em; }
+h1 .line > span { display: block; }
+.thesis { max-width: 32rem; font-size: clamp(1.25rem, 2.2vw, 1.625rem); line-height: 1.35; letter-spacing: -.015em; color: #d7dcea; }
+.facts {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.facts dd { font-weight: 500; line-height: 1.35; }
+
+#drag {
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  bottom: 9rem;
+  width: 50%;
+  z-index: 1;
+  cursor: grab;
+  touch-action: pan-y;
+}
+#drag.dragging { cursor: grabbing; }
+.cube-ui {
+  position: absolute;
+  right: max(24px, env(safe-area-inset-right, 0px));
+  bottom: 9rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.cube-ui button {
+  font: 500 .8125rem var(--sans);
+  padding: .55em 1.05em;
+  color: var(--fg);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.cube-ui button:hover:not(:disabled) { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .3); }
+.cube-ui button:disabled { color: var(--muted); cursor: default; }
+
+/* Interests ticker */
+.ticker { position: relative; z-index: 1; overflow: clip; border-block: 1px solid var(--line); background: rgba(6, 8, 15, .55); }
+.ticker-run { display: flex; width: max-content; animation: run 38s linear infinite; }
+.ticker span { padding: .9rem 1.75rem; font-family: var(--mono); font-size: .8125rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.ticker span::after { content: "•"; margin-left: 3.5rem; color: var(--c); }
+@keyframes run { to { transform: translateX(-50%); } }
+
+/* Sections */
+.sec { padding-block: clamp(5rem, 11vw, 9rem); }
+.sec-head { display: grid; gap: .875rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 1.02; letter-spacing: -.04em; }
+h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
+
+/* About */
+.statement {
+  max-width: 54rem;
+  font-size: clamp(1.75rem, 4vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -.03em;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.prose { display: grid; gap: 1.25rem; max-width: 40rem; color: #cdd3e2; }
+
+/* Cards light up under the pointer */
+.card {
+  position: relative;
+  overflow: clip;
+  padding: 1.75rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  transition: border-color .3s, transform .4s var(--ease);
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s;
+  background: radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, .09), transparent 70%);
+}
+.card:hover { border-color: rgba(255, 255, 255, .24); }
+.card:hover::before { opacity: 1; }
+.card > * { position: relative; }
+
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.tile { display: grid; gap: .5rem; align-content: start; }
+.tile p { color: var(--muted); }
+.principles { margin-top: clamp(3rem, 6vw, 4.5rem); }
+
+/* Numbers */
+.num { font-size: clamp(3rem, 6vw, 4.75rem); font-weight: 500; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
+.numbers .tile p:not(.num) { color: var(--muted); font-size: .9375rem; line-height: 1.4; }
+.numbers .tile p.num { color: var(--fg); }
+.numbers .card { background: rgba(13, 17, 28, .78); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+
+/* Projects: copy on the right while the cube turns on the left */
+.projects-sec .sec-head { max-width: 40rem; }
+.projects { display: grid; gap: 34vh; width: 56%; margin-left: auto; padding-bottom: 10vh; }
+.project { --pc: var(--blue); display: grid; gap: 1.125rem; padding: 2.25rem; background: rgba(13, 17, 28, .72); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.project::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--pc), transparent 65%);
+}
+.project-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .625rem 1rem; }
+.project-head h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -.035em; line-height: 1.08; }
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  padding: .3em .75em;
+  font-family: var(--mono);
+  font-size: .75rem;
+  line-height: 1.3;
+  color: var(--pc);
+  border: 1px solid color-mix(in srgb, var(--pc) 45%, transparent);
+  border-radius: 999px;
+}
+.status::before { content: ""; width: .5em; height: .5em; flex: none; border-radius: 50%; background: var(--pc); animation: blink 2.4s ease-in-out infinite; }
+.status.planned { color: var(--muted); border: 1px dashed var(--line); }
+.status.planned::before { background: transparent; border: 1px solid var(--muted); animation: none; }
+@keyframes blink { 50% { opacity: .25; } }
+.purpose { color: #d7dcea; }
+.split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; padding-top: 1.125rem; border-top: 1px solid var(--line); }
+.split > div { display: grid; gap: .625rem; align-content: start; min-width: 0; }
+.bullets { display: grid; gap: .5rem; font-size: .9375rem; line-height: 1.45; color: #cdd3e2; }
+.bullets li { position: relative; padding-left: 1rem; }
+.bullets li::before { content: ""; position: absolute; left: 0; top: .6em; width: 5px; height: 5px; border-radius: 50%; background: var(--pc); }
+.caution { font-size: .9375rem; color: var(--muted); padding-top: 1rem; border-top: 1px solid var(--line); }
+
+/* Academics */
+.academics-copy { max-width: 44rem; font-size: clamp(1.25rem, 2.2vw, 1.625rem); line-height: 1.35; letter-spacing: -.015em; color: #d7dcea; margin-bottom: 2.5rem; }
+
+/* Plan: one wide timeline, moved sideways by scrolling on large screens */
+.plan-sec { background: var(--panel-solid); border-block: 1px solid var(--line); position: relative; z-index: 1; }
+.plan-pin { padding-block: clamp(4rem, 8vw, 6rem); overflow: clip; }
+.plan-pin.pinned { display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-block: 4.5rem 2rem; }
+.plan-pin > .wrap { width: 100%; }
+.plan-pin .sec-head { margin-bottom: 2rem; }
+.rail { height: 2px; background: var(--line); margin-bottom: 2rem; display: none; }
+.rail span { display: block; height: 100%; background: var(--c); transform: scaleX(0); transform-origin: left; }
+.pinned .rail { display: block; }
+.plan-scroll { overflow-x: auto; scrollbar-width: thin; }
+.pinned .plan-scroll { overflow: visible; }
+.plan-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  padding-left: max(24px, calc((100vw - 78rem) / 2 + 24px));
+  padding-right: max(24px, calc((100vw - 78rem) / 2 + 24px));
+}
+.stage { display: grid; gap: 1.25rem; align-content: start; width: min(34rem, 72vw); padding: 2rem; }
+.stage-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.stage h3 { font-size: clamp(2rem, 3.4vw, 2.75rem); letter-spacing: -.04em; line-height: 1.05; }
+.stage .track { display: grid; gap: .375rem; padding-top: 1.125rem; border-top: 1px solid var(--line); }
+.stage .track p:last-child { color: #d7dcea; }
+.stage.now { border-color: color-mix(in srgb, var(--blue) 55%, transparent); }
+
+/* Contact */
+.contact-list { display: grid; max-width: 40rem; }
+.contact-list > div { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem; align-items: baseline; padding-block: 1.25rem; border-top: 1px solid var(--line); }
+.contact-list > div:last-child { border-bottom: 1px solid var(--line); }
+.contact-list dd { font-size: clamp(1.0625rem, 2vw, 1.375rem); letter-spacing: -.015em; overflow-wrap: anywhere; }
+.contact-list a { text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .35s var(--ease); }
+.contact-list a:hover { background-size: 100% 1px; }
+.tile a { color: var(--fg); }
+
+footer { overflow: clip; border-top: 1px solid var(--line); background: var(--bg); }
+footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
+.mega {
+  font-size: clamp(2.5rem, 9.4vw, 8.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.05em;
+  white-space: nowrap;
+  color: transparent;
+  background: linear-gradient(180deg, #f3f5fa, rgba(243, 245, 250, .08));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@media (max-width: 899px) {
+  .bar .mark { display: none; }
+  .hero .wrap { align-content: start; gap: 2rem; padding-block: 5.5rem 2rem; min-height: 0; }
+  .hero-gap { height: 74vw; max-height: 26rem; }
+  #drag { top: auto; left: 0; right: 0; width: 100%; bottom: auto; height: 74vw; max-height: 26rem; }
+  .cube-ui { position: static; justify-content: center; flex-wrap: wrap; }
+  .facts, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid3 { grid-template-columns: minmax(0, 1fr); }
+  .projects { width: 100%; gap: 1.25rem; padding-bottom: 0; }
+  .project { padding: 1.5rem; }
+  .plan-scroll { overflow: visible; }
+  .plan-track { flex-direction: column; width: auto; padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px)); }
+  .stage { width: 100%; padding: 1.5rem; }
+}
+@media (min-width: 900px) {
+  .hero-gap { display: none; }
+}
+@media (max-width: 560px) {
+  .grid2, .split { grid-template-columns: minmax(0, 1fr); }
+  .contact-list > div { grid-template-columns: minmax(0, 1fr); gap: .125rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-run, .status::before { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="gl" aria-hidden="true" hidden></canvas>
+<div class="glow" id="glow" aria-hidden="true"></div>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="mark" href="#hero">Seelam Pranav</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#academics">Academics</a></li>
+        <li><a href="#beyond">Beyond school</a></li>
+        <li><a href="#plan">The plan</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="progress" id="progress"></div>
+</div>
+
+<header class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <h1><span class="line"><span>Seelam Pranav</span></span> <span class="line"><span>Sai Royal</span></span></h1>
+      <p class="thesis">I question how things work, and when I can't find a solution, I build my own.</p>
+    </div>
+
+    <div class="hero-gap" aria-hidden="true"></div>
+    <div id="drag" aria-hidden="true" hidden></div>
+    <div class="cube-ui" id="cube-ui" hidden>
+      <span class="label" id="cube-status">Drag to spin</span>
+      <button type="button" id="scramble">Scramble</button>
+      <button type="button" id="solve">Solve</button>
+    </div>
+
+    <dl class="facts">
+      <div><dt class="label">Currently in</dt><dd>Grade 10</dd></div>
+      <div><dt class="label">School</dt><dd>National Public School Whitefield</dd></div>
+      <div><dt class="label">Based in</dt><dd>Bangalore, India</dd></div>
+      <div><dt class="label">Role</dt><dd>Founder and chief project director, NeuroCube</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-run">
+    <span>Artificial intelligence</span><span>Theoretical physics</span><span>Mathematics</span><span>Educational technology</span><span>Entrepreneurship</span><span>Speedcubing</span><span>Astronomy</span>
+    <span>Artificial intelligence</span><span>Theoretical physics</span><span>Mathematics</span><span>Educational technology</span><span>Entrepreneurship</span><span>Speedcubing</span><span>Astronomy</span>
+  </div>
+</div>
+
+<main>
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="label">About me</h2></div>
+      <p class="statement" id="statement">I enjoy learning new things and chasing unanswered questions. I often find myself questioning the fundamental laws of the universe and wanting to understand why they are the way they are.</p>
+      <div class="prose">
+        <p>I want solutions to everything, and I often end up creating my own. VIVEKA began with my Sanskrit teacher, who was eager to learn English and get good at it but unsure how. SAGE began because I wanted to build something amazing: an AI that makes complex, repetitive, time-consuming tasks faster and runs completely locally, so it's truly a personal assistant. NeuroCube began with cubing, something I know well and like, and the wish to help people with it.</p>
+        <p>My interests span artificial intelligence, theoretical physics, mathematics and educational technology. I focus on a small number of substantial projects, and I want each one to end up finished, documented and useful to someone.</p>
+        <p>Everything here is still in progress. On this page I separate what's done from what's under way and what's only planned, so you can see exactly where each project stands.</p>
+      </div>
+
+      <ul class="grid4 principles">
+        <li class="card tile reveal"><h3>Depth over quantity</h3><p>A few substantial projects instead of many small ones.</p></li>
+        <li class="card tile reveal"><h3>Execution over ambition</h3><p>Ideas become working products and documented results.</p></li>
+        <li class="card tile reveal"><h3>Intellectual honesty</h3><p>I don't exaggerate findings, contributions or impact.</p></li>
+        <li class="card tile reveal"><h3>Measurable impact</h3><p>I check whether a project really helps people.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec projects-sec" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Projects</p>
+        <h2>Five projects, each at an honest stage.</h2>
+      </div>
+
+      <ul class="grid4 numbers" id="numbers">
+        <li class="card tile reveal"><p class="num" data-count="4">4</p><p>projects in progress</p></li>
+        <li class="card tile reveal"><p class="num" data-count="1">1</p><p>research project planned for Grade 11</p></li>
+        <li class="card tile reveal"><p class="num" data-count="50" data-prefix="~">~50</p><p>people working on NeuroCube</p></li>
+        <li class="card tile reveal"><p class="num" data-count="4">4</p><p>WCA events I compete in</p></li>
+      </ul>
+
+      <div class="projects" id="project-list" style="margin-top: clamp(4rem, 10vw, 8rem)">
+        <article class="card project" data-color="blue" style="--pc: var(--blue)">
+          <div class="project-head">
+            <h3>SAGE</h3>
+            <span class="status">In development</span>
+          </div>
+          <p class="label">Artificial intelligence · Software engineering</p>
+          <p class="purpose">A local-first personal AI environment that helps with information management, research, automation, memory and computer interaction.</p>
+          <div class="split">
+            <div>
+              <p class="label">Where it stands</p>
+              <ul class="bullets">
+                <li>Python backend and React and TypeScript frontend are in place</li>
+                <li>Working on desktop integration and local AI models</li>
+                <li>Implementing persistent memory and automation</li>
+              </ul>
+            </div>
+            <div>
+              <p class="label">What's next</p>
+              <ul class="bullets">
+                <li>A stable core and complete memory architecture</li>
+                <li>More reliable and safer autonomous actions</li>
+                <li>Technical documentation and feedback from independent users</li>
+              </ul>
+            </div>
+          </div>
+          <p class="label">Runs locally for now, so there's no public link yet</p>
+        </article>
+
+        <article class="card project" data-color="green" style="--pc: var(--green)">
+          <div class="project-head">
+            <h3>VIVEKA</h3>
+            <span class="status">Early development</span>
+          </div>
+          <p class="label">Educational technology · Entrepreneurship</p>
+          <p class="purpose">An adaptive app that teaches English through Indian regional languages, for people who find conventional English-learning platforms hard to use.</p>
+          <div class="split">
+            <div>
+              <p class="label">Where it stands</p>
+              <ul class="bullets">
+                <li>Application concept established</li>
+                <li>Backend started in Python and FastAPI</li>
+                <li>Database and application architecture in development</li>
+              </ul>
+            </div>
+            <div>
+              <p class="label">What's next</p>
+              <ul class="bullets">
+                <li>Core learning modules with native-language explanations</li>
+                <li>Adaptive learning and personalised feedback</li>
+                <li>Feedback from teachers and learners, and assessments of learning outcomes</li>
+              </ul>
+            </div>
+          </div>
+          <p class="label">Runs locally for now, so there's no public link yet</p>
+        </article>
+
+        <article class="card project" data-color="red" style="--pc: var(--red)">
+          <div class="project-head">
+            <h3>NeuroCube</h3>
+            <span class="status">Research framework in development</span>
+          </div>
+          <p class="label">Cubing · Rehabilitation research · Leadership</p>
+          <p class="purpose">I started NeuroCube to help people with cubing, something I know well and like. We're exploring how Rubik's Cube-based activities relate to cognitive-motor coordination, and whether they could be useful in neurological rehabilitation research. Areas of interest include focal hand dystonia, stroke rehabilitation, multiple sclerosis and dementia-related challenges.</p>
+          <div class="split">
+            <div>
+              <p class="label">Where it stands</p>
+              <ul class="bullets">
+                <li>About 50 people work on NeuroCube</li>
+                <li>As founder and chief project director, I manage the team and lead negotiations</li>
+                <li>Pursuing collaborations with experts and established organizations such as Ignite Youth Community (IYC)</li>
+                <li>The research framework is still developing</li>
+              </ul>
+            </div>
+            <div>
+              <p class="label">What's next</p>
+              <ul class="bullets">
+                <li>Literature reviews and specific, defensible research questions</li>
+                <li>Relationships with academics and healthcare professionals</li>
+                <li>An ethical framework and supervised research</li>
+              </ul>
+            </div>
+          </div>
+          <p class="caution">NeuroCube's proposed activities are not clinically validated treatments.</p>
+        </article>
+
+        <article class="card project" data-color="orange" style="--pc: var(--orange)">
+          <div class="project-head">
+            <h3>Vaxaliaa</h3>
+            <span class="status">Early stage</span>
+          </div>
+          <p class="label">Entrepreneurship · Web development · Business strategy</p>
+          <p class="purpose">A web-design venture that helps tuition centres build a professional online presence. The goal is clean, modern, mobile-friendly websites that build trust with parents, improve visibility in online searches, generate student enquiries, and present courses, faculty, facilities and contact information professionally.</p>
+          <div class="split">
+            <div>
+              <p class="label">Where it stands</p>
+              <ul class="bullets">
+                <li>Identifying customer needs and building market understanding</li>
+                <li>Developing the business model and a practical service offering</li>
+                <li>No confirmed clients or completed client websites yet</li>
+              </ul>
+            </div>
+            <div>
+              <p class="label">What's next</p>
+              <ul class="bullets">
+                <li>Finalise the business model and build a demonstration website</li>
+                <li>Approach tuition centres and secure a first genuine client</li>
+                <li>Set up a repeatable delivery process, then collect client feedback and measure outcomes</li>
+                <li>Explore expanding to startups and other small businesses</li>
+              </ul>
+            </div>
+          </div>
+          <p class="caution">The goals above are plans, not results. I'll add client work here only once it's real and I can show evidence for it.</p>
+        </article>
+
+        <article class="card project" data-color="yellow" style="--pc: var(--yellow)">
+          <div class="project-head">
+            <h3>Quantum entanglement research</h3>
+            <span class="status planned">Planned for Grade 11</span>
+          </div>
+          <p class="label">Theoretical physics · Mathematical physics</p>
+          <p class="purpose">A small student research team investigating one well-defined topic, such as Bell's inequalities or quantum teleportation. The aim is a genuine, reproducible investigation, which doesn't have to mean new physics.</p>
+          <div class="split">
+            <div>
+              <p class="label">Where it stands</p>
+              <ul class="bullets">
+                <li>Research has not started yet</li>
+                <li>Preparing through mathematics, introductory quantum mechanics and Python</li>
+              </ul>
+            </div>
+            <div>
+              <p class="label">What's next</p>
+              <ul class="bullets">
+                <li>Read and analyse the established literature</li>
+                <li>Find an academic mentor</li>
+                <li>Settle on a focused research question before building a larger team</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="academics">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Academics</p>
+        <h2>Academics come first.</h2>
+      </div>
+      <p class="academics-copy">Projects can't replace the mathematics and science I need. My earlier results showed real weaknesses in mathematics and numerical accuracy. I've made progress since then, and I'm still strengthening my fundamentals.</p>
+      <ul class="grid2">
+        <li class="card tile reveal"><h3>Mathematics</h3><p>Algebra, trigonometry and functions, moving toward calculus and linear algebra.</p></li>
+        <li class="card tile reveal"><h3>Physics</h3><p>Mechanics, electricity and magnetism, waves and modern physics, with close attention to numerical accuracy.</p></li>
+        <li class="card tile reveal"><h3>Chemistry</h3><p>Reactions, nomenclature, formula application and numerical problem-solving.</p></li>
+        <li class="card tile reveal"><h3>English and communication</h3><p>Academic writing, scientific documentation and explaining complex ideas clearly.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="beyond" style="padding-top: 0">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Beyond school</p>
+        <h2>What I do when nobody's grading.</h2>
+      </div>
+      <ul class="grid3">
+        <li class="card tile reveal"><h3>Competitive speedcubing</h3><p>I compete in 3x3, 3x3 one-handed, 2x2 and 4x4. <a href="https://www.worldcubeassociation.org/persons/2026ROYA01">See my WCA profile</a>.</p></li>
+        <li class="card tile reveal"><h3>Volleyball</h3><p>A sport I keep playing simply because I enjoy it.</p></li>
+        <li class="card tile reveal"><h3>Astronomy and physics</h3><p>I explore astronomy, astrophysics and theoretical physics on my own, outside of class.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="plan-sec" id="plan">
+    <div class="plan-pin" id="plan-pin">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="label">The plan</p>
+          <h2>Where this is going.</h2>
+        </div>
+        <div class="rail" aria-hidden="true"><span id="rail-fill"></span></div>
+      </div>
+      <div class="plan-scroll">
+        <ol class="plan-track" id="plan-track">
+          <li class="card stage now">
+            <div class="stage-head"><h3>Grade 10</h3><span class="label">Now · Foundation</span></div>
+            <div class="track"><p class="label">Academic</p><p>Improve in mathematics and science, keep a consistent study routine, and begin the prerequisites for quantum mechanics.</p></div>
+            <div class="track"><p class="label">Beyond academics</p><p>Get SAGE working reliably, build VIVEKA's core features, and strengthen NeuroCube's research framework.</p></div>
+          </li>
+          <li class="card stage">
+            <div class="stage-head"><h3>Grade 11</h3><span class="label">Research and expansion</span></div>
+            <div class="track"><p class="label">Academic</p><p>Start the quantum entanglement research with an academic mentor, and enter competitions that suit my preparation.</p></div>
+            <div class="track"><p class="label">Beyond academics</p><p>Test SAGE in real-world use, pilot VIVEKA with actual learners, pursue supervised research through NeuroCube, and finalise Vaxaliaa's business model and demonstration website.</p></div>
+          </li>
+          <li class="card stage">
+            <div class="stage-head"><h3>Grade 12</h3><span class="label">Consolidation</span></div>
+            <div class="track"><p class="label">Academic</p><p>Consolidate my research findings and complete my university applications.</p></div>
+            <div class="track"><p class="label">Beyond academics</p><p>Document my main technical work, show measurable educational or community impact, and secure Vaxaliaa's first genuine client.</p></div>
+          </li>
+          <li class="card stage">
+            <div class="stage-head"><h3>Long term</h3></div>
+            <div class="track"><p class="label">Academic</p><p>Keep working across science, engineering and independent research.</p></div>
+            <div class="track"><p class="label">Beyond academics</p><p>Contribute meaningfully to the scientific and technological community.</p></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Contact</p>
+        <h2>Get in touch.</h2>
+      </div>
+      <dl class="contact-list">
+        <div><dt class="label">Email</dt><dd>pranavsaiseelam.25@gmail.com</dd></div>
+        <div><dt class="label">Phone</dt><dd>+91 6300821359</dd></div>
+        <div><dt class="label">GitHub</dt><dd><a href="https://github.com/pranavsaiseelam25-alt">pranavsaiseelam25-alt</a></dd></div>
+        <div><dt class="label">LinkedIn</dt><dd><a href="https://www.linkedin.com/in/pranav-seelam-189214412/">pranav-seelam-189214412</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="mega" aria-hidden="true">Seelam Pranav</p>
+    <p class="label">Last updated November 2026</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var COLORS = { blue: '#5b8cff', green: '#34d58a', red: '#ff5a66', orange: '#ff9a3d', yellow: '#ffd94a' };
+  var hasGsap = !!(window.gsap && window.ScrollTrigger);
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+  /* Cards follow the pointer */
+  document.addEventListener('pointermove', function (e) {
+    var card = e.target.closest && e.target.closest('.card');
+    if (!card) return;
+    var r = card.getBoundingClientRect();
+    card.style.setProperty('--x', e.clientX - r.left + 'px');
+    card.style.setProperty('--y', e.clientY - r.top + 'px');
+  }, { passive: true });
+
+  /* Menu links scroll smoothly to their sections */
+  var links = all('.bar nav a');
+  var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  all('.bar a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.querySelector(a.getAttribute('href'));
+      if (!t) return;
+      e.preventDefault();
+      window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 40, behavior: calm ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* Reading progress, current section, and the room's light */
+  var projects = all('.project');
+  var accent = 'blue';
+  function setAccent(name) {
+    if (name === accent) return;
+    accent = name;
+    document.documentElement.style.setProperty('--c', COLORS[name]);
+    $('glow').style.backgroundColor = COLORS[name];
+    if (rim) rim.color.set(COLORS[name]);
+  }
+  function onScroll() {
+    var range = document.documentElement.scrollHeight - innerHeight;
+    $('progress').style.transform = 'scaleX(' + (range > 0 ? Math.min(1, scrollY / range) : 0) + ')';
+    var current = -1;
+    targets.forEach(function (t, i) { if (t.getBoundingClientRect().top <= 140) current = i; });
+    if (range > 0 && scrollY >= range - 2) current = targets.length - 1;
+    links.forEach(function (a, i) {
+      if (i === current) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+    var next = 'blue';
+    projects.forEach(function (p) {
+      if (p.getBoundingClientRect().top < innerHeight * .6) next = p.dataset.color;
+    });
+    if ($('academics').getBoundingClientRect().top < innerHeight * .5) next = 'blue';
+    setAccent(next);
+  }
+
+  /* The cube */
+  var rim = null, rig = null, keys = [], remeasure = null;
+  var history = [], busy = false, solve = function () {};
+  var user = { x: 0, y: 0 }, pointer = { x: 0, y: 0 };
+
+  function buildScene() {
+    if (!window.THREE) return false;
+    var canvas = $('gl');
+    var renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    } catch (err) { return false; }
+    canvas.hidden = false;
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(32, 1, .1, 100);
+    camera.position.z = 13;
+    var halfH = Math.tan(THREE.MathUtils.degToRad(16)) * 13;
+
+    /* A small studio for reflections */
+    var studio = new THREE.Scene();
+    studio.add(new THREE.Mesh(new THREE.BoxGeometry(30, 30, 30), new THREE.MeshBasicMaterial({ color: 0x0b0f1c, side: THREE.BackSide })));
+    [[0, 12, 4, 22, 10, 5], [-13, 2, 6, 6, 18, 2.5], [13, -2, 6, 6, 18, 1.6], [0, -12, 2, 20, 8, .7]].forEach(function (s) {
+      var panel = new THREE.Mesh(new THREE.PlaneGeometry(s[3], s[4]), new THREE.MeshBasicMaterial({ color: new THREE.Color(s[5], s[5], s[5]), side: THREE.DoubleSide }));
+      panel.position.set(s[0], s[1], s[2]);
+      panel.lookAt(0, 0, 0);
+      studio.add(panel);
+    });
+    var pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(studio, .03).texture;
+    pmrem.dispose();
+
+    var key = new THREE.DirectionalLight(0xffffff, 1.5);
+    key.position.set(4, 7, 8);
+    scene.add(key);
+    rim = new THREE.DirectionalLight(COLORS.blue, 2.4);
+    rim.position.set(-7, -3, -4);
+    scene.add(rim);
+
+    /* Stars in the background */
+    var count = innerWidth < 900 ? 220 : 520;
+    var starPos = new Float32Array(count * 3);
+    for (var i = 0; i < count; i++) {
+      starPos[i * 3] = (Math.random() - .5) * 34;
+      starPos[i * 3 + 1] = (Math.random() - .5) * 22;
+      starPos[i * 3 + 2] = -Math.random() * 16 - 2;
+    }
+    var starGeo = new THREE.BufferGeometry();
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    var stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xbfd0ff, size: .035, transparent: true, opacity: .75, depthWrite: false }));
+    scene.add(stars);
+
+    /* Rounded pieces */
+    function roundedBox(size, radius, seg) {
+      var g = new THREE.BoxGeometry(size, size, size, seg, seg, seg);
+      var pos = g.attributes.position, v = new THREE.Vector3(), inner = size / 2 - radius;
+      for (var n = 0; n < pos.count; n++) {
+        v.fromBufferAttribute(pos, n);
+        var c = new THREE.Vector3(
+          Math.max(-inner, Math.min(inner, v.x)),
+          Math.max(-inner, Math.min(inner, v.y)),
+          Math.max(-inner, Math.min(inner, v.z))
+        );
+        v.sub(c).normalize().multiplyScalar(radius).add(c);
+        pos.setXYZ(n, v.x, v.y, v.z);
+      }
+      g.computeVertexNormals();
+      return g;
+    }
+    function roundedSquare(size, r) {
+      var h = size / 2, s = new THREE.Shape();
+      s.moveTo(-h + r, -h);
+      s.lineTo(h - r, -h); s.quadraticCurveTo(h, -h, h, -h + r);
+      s.lineTo(h, h - r); s.quadraticCurveTo(h, h, h - r, h);
+      s.lineTo(-h + r, h); s.quadraticCurveTo(-h, h, -h, h - r);
+      s.lineTo(-h, -h + r); s.quadraticCurveTo(-h, -h, -h + r, -h);
+      return new THREE.ShapeGeometry(s, 6);
+    }
+    var bodyGeo = roundedBox(.97, .1, 6);
+    var stickerGeo = roundedSquare(.8, .12);
+    var bodyMat = new THREE.MeshStandardMaterial({ color: 0x0c0e14, roughness: .34, metalness: .55 });
+    function sticker(hex) {
+      return new THREE.MeshPhysicalMaterial({ color: new THREE.Color(hex).convertSRGBToLinear(), roughness: .34, metalness: 0, clearcoat: .55, clearcoatRoughness: .25, envMapIntensity: .4 });
+    }
+    var FACES = [
+      { axis: 'z', sign: 1, hex: '#22b56b', ry: 0, rx: 0 },
+      { axis: 'z', sign: -1, hex: '#2f66ee', ry: Math.PI, rx: 0 },
+      { axis: 'x', sign: 1, hex: '#e23340', ry: Math.PI / 2, rx: 0 },
+      { axis: 'x', sign: -1, hex: '#f5841f', ry: -Math.PI / 2, rx: 0 },
+      { axis: 'y', sign: 1, hex: '#f2f4f8', ry: 0, rx: -Math.PI / 2 },
+      { axis: 'y', sign: -1, hex: '#ffd21f', ry: 0, rx: Math.PI / 2 }
+    ];
+    FACES.forEach(function (f) { f.mat = sticker(f.hex); });
+
+    var cube = new THREE.Group();
+    scene.add(cube);
+    var pieces = [];
+    [-1, 0, 1].forEach(function (x) {
+      [-1, 0, 1].forEach(function (y) {
+        [-1, 0, 1].forEach(function (z) {
+          if (!x && !y && !z) return;
+          var g = new THREE.Group();
+          g.add(new THREE.Mesh(bodyGeo, bodyMat));
+          var at = { x: x, y: y, z: z };
+          FACES.forEach(function (f) {
+            if (at[f.axis] !== f.sign) return;
+            var m = new THREE.Mesh(stickerGeo, f.mat);
+            m.rotation.set(f.rx, f.ry, 0);
+            m.position[f.axis] = f.sign * .4875;
+            g.add(m);
+          });
+          cube.add(g);
+          pieces.push({
+            g: g,
+            p: new THREE.Vector3(x, y, z),
+            q: new THREE.Quaternion(),
+            spin: new THREE.Vector3(Math.random() - .5, Math.random() - .5, Math.random() - .5).normalize(),
+            kick: .6 + Math.random() * .9,
+            tp: null,
+            tq: null
+          });
+        });
+      });
+    });
+
+    var AXES = ['x', 'y', 'z'];
+    var UNIT = [new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 1)];
+    var extra = new THREE.Quaternion();
+    function layout(spread) {
+      var open = spread - 1;
+      pieces.forEach(function (piece) {
+        var p = piece.tp || piece.p, q = piece.tq || piece.q;
+        piece.g.position.copy(p).multiplyScalar(1 + open * piece.kick);
+        if (open > .001) {
+          extra.setFromAxisAngle(piece.spin, open * 1.6 * piece.kick);
+          piece.g.quaternion.copy(extra).multiply(q);
+        } else {
+          piece.g.quaternion.copy(q);
+        }
+      });
+    }
+    var m4 = new THREE.Matrix4();
+    function settle(move, layer) {
+      var angle = move.dir * Math.PI / 2, turnQ = new THREE.Quaternion().setFromAxisAngle(UNIT[move.axis], angle);
+      layer.forEach(function (piece) {
+        piece.p.applyQuaternion(turnQ).round();
+        piece.q.premultiply(turnQ);
+        m4.makeRotationFromQuaternion(piece.q);
+        for (var e = 0; e < 16; e++) m4.elements[e] = Math.round(m4.elements[e]);
+        piece.q.setFromRotationMatrix(m4);
+        piece.tp = piece.tq = null;
+      });
+    }
+    function turn(move, ms) {
+      var name = AXES[move.axis];
+      var layer = pieces.filter(function (piece) { return Math.round(piece.p[name]) === move.layer; });
+      if (!ms) { settle(move, layer); return Promise.resolve(); }
+      return new Promise(function (done) {
+        var start = performance.now(), q = new THREE.Quaternion();
+        function step() {
+          var t = Math.min(1, (performance.now() - start) / ms);
+          if (t === 1) { settle(move, layer); done(); return; }
+          var eased = t * t * (3 - 2 * t);
+          q.setFromAxisAngle(UNIT[move.axis], move.dir * eased * Math.PI / 2);
+          layer.forEach(function (piece) {
+            piece.tp = piece.p.clone().applyQuaternion(q);
+            piece.tq = piece.q.clone().premultiply(q);
+          });
+          requestAnimationFrame(step);
+        }
+        step();
+      });
+    }
+    function randomMoves(n) {
+      var out = [], prev = null;
+      while (out.length < n) {
+        var m = { axis: Math.floor(Math.random() * 3), layer: Math.random() < .5 ? -1 : 1, dir: Math.random() < .5 ? -1 : 1 };
+        if (prev && prev.axis === m.axis && prev.layer === m.layer) continue;
+        out.push(m);
+        prev = m;
+      }
+      return out;
+    }
+    var status = $('cube-status'), scrambleBtn = $('scramble'), solveBtn = $('solve');
+    function controls() {
+      scrambleBtn.disabled = busy;
+      solveBtn.disabled = busy || !history.length;
+    }
+    function play(moves, ms, onStep) {
+      busy = true;
+      controls();
+      return moves.reduce(function (chain, move, i) {
+        return chain.then(function () {
+          if (onStep) onStep(moves.length - i);
+          return turn(move, ms);
+        });
+      }, Promise.resolve()).then(function () { busy = false; controls(); });
+    }
+    function scramble(ms) {
+      var moves = randomMoves(20);
+      status.textContent = 'Scrambling';
+      return play(moves, ms).then(function () {
+        history = history.concat(moves);
+        status.textContent = 'Scrambled';
+        controls();
+      });
+    }
+    solve = function () {
+      var moves = history.slice().reverse().map(function (m) { return { axis: m.axis, layer: m.layer, dir: -m.dir }; });
+      history = [];
+      var ms = calm ? 0 : Math.min(120, 2400 / moves.length);
+      return play(moves, ms, function (left) {
+        status.textContent = left + (left === 1 ? ' move left' : ' moves left');
+      }).then(function () { status.textContent = 'Solved'; });
+    };
+    scrambleBtn.addEventListener('click', function () { scramble(calm ? 0 : 75); });
+    solveBtn.addEventListener('click', function () { solve(); });
+
+    /* Where the cube sits at each point of the page */
+    function S(x, y, s, sp, rx, ry, o, d) { return { x: x, y: y, s: s, sp: sp, rx: rx, ry: ry, o: o, d: d }; }
+    var PI = Math.PI;
+    function states() {
+      var wide = innerWidth >= 900;
+      var gap = document.querySelector('.hero-gap').getBoundingClientRect();
+      var gapY = 1 - 2 * (gap.top + scrollY + gap.height / 2) / innerHeight;
+      var fx = wide ? -.6 : 0, fs = wide ? .74 : .72, fo = wide ? 1 : .2;
+      return {
+        hero: wide ? S(.58, .12, .86, 1, .46, -.62, 1, 1) : S(0, gapY, .52, 1, .46, -.62, 1, 1),
+        burst: wide ? S(.7, .02, .96, 2, 1, .9, .42, 0) : S(.25, 0, .8, 1.9, 1, .9, .2, 0),
+        sage: S(fx, 0, fs, 1, .3, PI - .5, fo, 0),
+        viveka: S(fx, 0, fs, 1, .3, 2 * PI - .5, fo, 0),
+        neuro: S(fx, 0, fs, 1, .3, 1.5 * PI - .5, fo, 0),
+        vaxaliaa: S(fx, 0, fs, 1, .3, 2.5 * PI - .5, fo, 0),
+        quantum: S(fx, 0, fs, 1, -1.22, 2.5 * PI - .5, fo, 0),
+        gone: S(fx, 0, fs * .8, 1.25, -1.6, 2.5 * PI, 0, 0),
+        finale: wide ? S(.56, .2, .7, 1, .46, 2 * PI - .62, 1, 1) : S(.3, .5, .4, 1, .46, 2 * PI - .62, .9, 1)
+      };
+    }
+    function measure() {
+      var vh = innerHeight, st = states();
+      var top = function (el) { return el.getBoundingClientRect().top + scrollY; };
+      var mid = function (el) { return top(el) + el.offsetHeight / 2 - vh / 2; };
+      var about = $('about'), list = projects;
+      keys = [
+        [0, st.hero],
+        [top(about) - vh * (innerWidth >= 900 ? .75 : 1.15), st.hero],
+        [top(about) + about.offsetHeight * .42 - vh / 2, st.burst],
+        [mid(list[0]) - vh * .25, st.sage],
+        [mid(list[0]), st.sage],
+        [mid(list[1]), st.viveka],
+        [mid(list[2]), st.neuro],
+        [mid(list[3]), st.vaxaliaa],
+        [mid(list[4]), st.quantum],
+        [top($('academics')) - vh * .35, st.gone],
+        [top($('contact')) - vh * .85, st.gone],
+        [Math.min(top($('contact')) - vh * .15, document.documentElement.scrollHeight - vh - 2), st.finale]
+      ];
+      for (var i = 1; i < keys.length; i++) if (keys[i][0] <= keys[i - 1][0]) keys[i][0] = keys[i - 1][0] + 1;
+    }
+    function targetAt(y) {
+      if (y <= keys[0][0]) return keys[0][1];
+      for (var i = 1; i < keys.length; i++) {
+        if (y <= keys[i][0]) {
+          var a = keys[i - 1], b = keys[i];
+          var t = (y - a[0]) / (b[0] - a[0]);
+          t = t * t * (3 - 2 * t);
+          var out = {};
+          for (var k in a[1]) out[k] = a[1][k] + (b[1][k] - a[1][k]) * t;
+          return out;
+        }
+      }
+      return keys[keys.length - 1][1];
+    }
+
+    function resize() {
+      var w = innerWidth, h = innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      measure();
+    }
+    addEventListener('resize', resize);
+    resize();
+    rig = Object.assign({}, keys[0][1]);
+    if (!calm) { rig.s = .001; }
+
+    var yaw = 0, last = performance.now();
+    function render(now) {
+      var dt = Math.min(.05, (now - last) / 1000);
+      last = now;
+      var target = targetAt(scrollY);
+      var damp = calm ? 1 : 1 - Math.exp(-dt * 5.5);
+      for (var k in target) rig[k] += (target[k] - rig[k]) * damp;
+      if (!calm) yaw += dt * .22 * rig.d;
+
+      canvas.style.opacity = rig.o.toFixed(3);
+      if (rig.o > .004) {
+        var halfW = halfH * camera.aspect;
+        cube.position.set(rig.x * halfW, rig.y * halfH, 0);
+        cube.scale.setScalar(Math.max(.001, rig.s));
+        cube.rotation.set(rig.rx + user.y * rig.d + pointer.y * .06, rig.ry + yaw + user.x * rig.d + pointer.x * .1, 0);
+        layout(rig.sp);
+        stars.rotation.y = now * .000012;
+        stars.position.y = scrollY * .0012;
+        renderer.render(scene, camera);
+      }
+      if (!calm && !busy && history.length && scrollY > innerHeight * .55) solve();
+      if (!calm) requestAnimationFrame(render);
+    }
+
+    if (calm) {
+      render(performance.now());
+      addEventListener('scroll', function () { render(performance.now()); }, { passive: true });
+      var idle = setInterval(function () { render(performance.now()); if (!busy) clearInterval(idle); }, 120);
+    } else {
+      requestAnimationFrame(render);
+      addEventListener('pointermove', function (e) {
+        pointer.x = e.clientX / innerWidth - .5;
+        pointer.y = e.clientY / innerHeight - .5;
+      }, { passive: true });
+    }
+
+    /* Drag to spin. Sideways only on touch, so the page still scrolls */
+    var drag = $('drag'), held = null;
+    drag.hidden = false;
+    $('cube-ui').hidden = false;
+    drag.addEventListener('pointerdown', function (e) {
+      held = { x: e.clientX, y: e.clientY };
+      drag.setPointerCapture(e.pointerId);
+      drag.classList.add('dragging');
+    });
+    drag.addEventListener('pointermove', function (e) {
+      if (!held) return;
+      user.x += (e.clientX - held.x) * .009;
+      user.y = Math.max(-1.3, Math.min(1.3, user.y + (e.clientY - held.y) * .007));
+      held = { x: e.clientX, y: e.clientY };
+      if (calm) render(performance.now());
+    });
+    function release() { held = null; drag.classList.remove('dragging'); }
+    drag.addEventListener('pointerup', release);
+    drag.addEventListener('pointercancel', release);
+
+    /* The page opens on a scrambled cube, which solves itself */
+    scramble(0).then(function () {
+      if (calm) { status.textContent = 'Drag to spin'; return; }
+      setTimeout(function () {
+        if (!busy && history.length) solve().then(function () { status.textContent = 'Your turn: drag or scramble'; });
+      }, 1500);
+    });
+
+    remeasure = measure;
+    addEventListener('load', measure);
+    return true;
+  }
+
+  try { buildScene(); } catch (err) { $('gl').hidden = true; }
+
+  /* Scroll story */
+  if (hasGsap && !calm) {
+    /* The name rises out of its lines */
+    gsap.from('h1 .line > span', { yPercent: 108, duration: 1.2, ease: 'expo.out', stagger: .1, delay: .1 });
+    gsap.from('.thesis, .facts, #cube-ui', { y: 24, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: .1, delay: .45 });
+
+    /* The statement brightens word by word */
+    var st = $('statement');
+    st.innerHTML = st.textContent.split(' ').map(function (w) { return '<span class="word">' + w + '</span>'; }).join(' ');
+    gsap.fromTo('.word', { opacity: .24 }, {
+      opacity: 1,
+      stagger: .05,
+      ease: 'none',
+      scrollTrigger: { trigger: st, start: 'top 78%', end: 'bottom 45%', scrub: .4 }
+    });
+
+    /* Cards settle into place */
+    ScrollTrigger.batch('.reveal', {
+      start: 'top 90%',
+      once: true,
+      onEnter: function (batch) {
+        gsap.fromTo(batch, { y: 34, opacity: .2 }, { y: 0, opacity: 1, duration: .9, ease: 'power3.out', stagger: .08, overwrite: true });
+      }
+    });
+    all('.project').forEach(function (p) {
+      gsap.fromTo(p, { y: 60 }, { y: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: p, start: 'top 92%', once: true } });
+    });
+
+    /* Big headings slide up */
+    all('h2:not(.label)').forEach(function (h) {
+      gsap.fromTo(h, { y: 40, opacity: .2 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: h, start: 'top 90%', once: true } });
+    });
+
+    /* Numbers count up once */
+    ScrollTrigger.create({
+      trigger: '#numbers',
+      start: 'top 85%',
+      once: true,
+      onEnter: function () {
+        all('[data-count]').forEach(function (el) {
+          var n = { v: 0 }, end = +el.dataset.count, pre = el.dataset.prefix || '';
+          gsap.to(n, {
+            v: end,
+            duration: 1.5,
+            ease: 'power2.out',
+            onUpdate: function () { el.textContent = pre + Math.round(n.v); }
+          });
+        });
+      }
+    });
+
+    /* The plan moves sideways on large screens */
+    var mm = gsap.matchMedia();
+    mm.add('(min-width: 900px)', function () {
+      var pin = $('plan-pin'), track = $('plan-track'), fill = $('rail-fill');
+      pin.classList.add('pinned');
+      var distance = function () { return Math.max(0, track.scrollWidth - innerWidth); };
+      gsap.to(track, {
+        x: function () { return -distance(); },
+        ease: 'none',
+        scrollTrigger: {
+          trigger: pin,
+          start: 'top top',
+          end: function () { return '+=' + distance() * 1.1; },
+          pin: true,
+          scrub: .6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: function (s) { fill.style.transform = 'scaleX(' + s.progress + ')'; }
+        }
+      });
+      return function () { pin.classList.remove('pinned'); };
+    });
+
+    ScrollTrigger.addEventListener('refresh', function () { if (remeasure) remeasure(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+  }
+
+  var queued = false;
+  addEventListener('scroll', function () {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; onScroll(); });
+  }, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
