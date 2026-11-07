@@ -276,6 +276,52 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 
 .statement, .prose, .academics-copy, .thesis, .sec-head, .contact-list { text-shadow: 0 1px 14px rgba(4, 5, 12, .85), 0 0 2px rgba(4, 5, 12, .6); }
 
+/* Gallery: a fixed collage on wide screens, a simpler stack on phones */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 200px;
+  gap: .75rem;
+  grid-template-areas:
+    "cube status status poster"
+    "cube logo home poster"
+    "monitor monitor vax vax";
+}
+.shot { position: relative; margin: 0; min-width: 0; overflow: clip; border: 1px solid var(--line); border-radius: 16px; background: var(--panel-solid); }
+.shot-open { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.shot-open:focus-visible { outline: 2px solid var(--fg); outline-offset: -4px; }
+.shot img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.shot:hover img { transform: scale(1.04); }
+.shot figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2rem .875rem .75rem;
+  font-size: .8125rem;
+  line-height: 1.3;
+  color: var(--fg);
+  pointer-events: none;
+  background: linear-gradient(transparent, rgba(4, 5, 12, .88));
+}
+.lightbox { max-width: min(92vw, 1200px); max-height: 92vh; padding: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--panel-solid); color: var(--fg); overflow: hidden; }
+.lightbox::backdrop { background: rgba(3, 4, 10, .82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.lightbox img { display: block; max-width: 100%; max-height: calc(92vh - 3.5rem); margin: 0 auto; }
+.lightbox p { padding: .875rem 1rem; text-transform: none; letter-spacing: 0; font-size: .8125rem; }
+.lightbox-close { position: absolute; top: .5rem; right: .5rem; width: 2.25rem; height: 2.25rem; font-size: 1.375rem; line-height: 1; color: var(--fg); background: rgba(4, 5, 12, .7); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; }
+@media (max-width: 899px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 150px;
+    grid-template-areas:
+      "cube cube"
+      "cube cube"
+      "status status"
+      "logo home"
+      "poster monitor"
+      "poster monitor"
+      "vax vax";
+  }
+}
+
 /* Numbers */
 .num { font-size: clamp(3rem, 6vw, 4.75rem); font-weight: 500; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
 .numbers .tile p:not(.num) { color: var(--muted); font-size: .9375rem; line-height: 1.4; }
@@ -629,6 +675,65 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
       </ul>
     </div>
   </section>
+
+  <section class="sec" id="gallery" style="padding-top: 0">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">In pictures</p>
+        <h2>The work, as it looks today.</h2>
+      </div>
+      <div class="gallery">
+        <figure class="shot reveal" style="grid-area: cube">
+          <button type="button" class="shot-open" data-full="gallery/speedcubing.webp" data-caption="Solving a 2x2 on a competition timer" aria-label="Enlarge: Solving a 2x2 on a competition timer">
+            <img src="gallery/speedcubing.webp" alt="Solving a 2x2 on a competition timer" loading="lazy" decoding="async" style="object-position: 62% 35%">
+          </button>
+          <figcaption>Solving a 2x2 on a competition timer</figcaption>
+        </figure>
+        <figure class="shot reveal" style="grid-area: status">
+          <button type="button" class="shot-open" data-full="gallery/sage-status.webp" data-caption="SAGE reporting live system status" aria-label="Enlarge: SAGE reporting live system status">
+            <img src="gallery/sage-status.webp" alt="SAGE reporting live system status" loading="lazy" decoding="async" style="object-position: 60% 40%">
+          </button>
+          <figcaption>SAGE reporting live system status</figcaption>
+        </figure>
+        <figure class="shot reveal" style="grid-area: poster">
+          <button type="button" class="shot-open" data-full="gallery/neurocube-poster.webp" data-caption="NeuroCube's call for volunteers, under Ignite Youth Community" aria-label="Enlarge: NeuroCube's call for volunteers, under Ignite Youth Community">
+            <img src="gallery/neurocube-poster.webp" alt="NeuroCube's call for volunteers, under Ignite Youth Community" loading="lazy" decoding="async" style="object-position: 50% 0%">
+          </button>
+          <figcaption>NeuroCube's call for volunteers, under Ignite Youth Community</figcaption>
+        </figure>
+        <figure class="shot reveal" style="grid-area: logo">
+          <button type="button" class="shot-open" data-full="gallery/neurocube-logo.webp" data-caption="The NeuroCube logo" aria-label="Enlarge: The NeuroCube logo">
+            <img src="gallery/neurocube-logo.webp" alt="The NeuroCube logo" loading="lazy" decoding="async" style="object-position: 50% 50%">
+          </button>
+          <figcaption>The NeuroCube logo</figcaption>
+        </figure>
+        <figure class="shot reveal" style="grid-area: home">
+          <button type="button" class="shot-open" data-full="gallery/sage-home.webp" data-caption="SAGE runs entirely on my laptop" aria-label="Enlarge: SAGE runs entirely on my laptop">
+            <img src="gallery/sage-home.webp" alt="SAGE runs entirely on my laptop" loading="lazy" decoding="async" style="object-position: 50% 45%">
+          </button>
+          <figcaption>SAGE runs entirely on my laptop</figcaption>
+        </figure>
+        <figure class="shot reveal" style="grid-area: monitor">
+          <button type="button" class="shot-open" data-full="gallery/sage-monitor.webp" data-caption="SAGE's live system monitor" aria-label="Enlarge: SAGE's live system monitor">
+            <img src="gallery/sage-monitor.webp" alt="SAGE's live system monitor" loading="lazy" decoding="async" style="object-position: 30% 30%">
+          </button>
+          <figcaption>SAGE's live system monitor</figcaption>
+        </figure>
+        <figure class="shot reveal" style="grid-area: vax">
+          <button type="button" class="shot-open" data-full="gallery/vaxaliaa.webp" data-caption="Vaxaliaa's website, in progress" aria-label="Enlarge: Vaxaliaa's website, in progress">
+            <img src="gallery/vaxaliaa.webp" alt="Vaxaliaa's website, in progress" loading="lazy" decoding="async" style="object-position: 20% 40%">
+          </button>
+          <figcaption>Vaxaliaa's website, in progress</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
+    <img id="lightbox-img" alt="">
+    <p class="label" id="lightbox-caption"></p>
+  </dialog>
 
   <section class="plan-sec" id="plan">
     <div class="plan-pin" id="plan-pin">
@@ -1348,6 +1453,21 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
 
     ScrollTrigger.addEventListener('refresh', function () { if (remeasure) remeasure(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+  }
+
+  /* Gallery images open larger in a dialog */
+  var box = $('lightbox');
+  if (box && box.showModal) {
+    all('.shot-open').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        $('lightbox-img').src = btn.dataset.full;
+        $('lightbox-img').alt = btn.dataset.caption;
+        $('lightbox-caption').textContent = btn.dataset.caption;
+        box.showModal();
+      });
+    });
+    $('lightbox-close').addEventListener('click', function () { box.close(); });
+    box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
   }
 
   /* Opening a details panel changes the page height, so the scroll story re-measures */
