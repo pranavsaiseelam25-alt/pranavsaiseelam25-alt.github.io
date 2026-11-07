@@ -323,6 +323,26 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .ledger > div, .next { display: grid; gap: .625rem; align-content: start; min-width: 0; }
 .next { padding-top: 1.125rem; border-top: 1px solid var(--line); }
 .ledger-open li::before { background: transparent; border: 1px solid var(--muted); }
+.more { padding-top: .875rem; border-top: 1px solid var(--line); }
+.more summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--fg);
+  cursor: pointer;
+  list-style: none;
+}
+.more summary::-webkit-details-marker { display: none; }
+.more summary::after { content: "+"; font-size: 1.125rem; line-height: 1; color: var(--pc); }
+.more[open] summary::after { content: "\2212"; }
+.more summary:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.more .bullets { margin-top: .75rem; }
+.more b { font-weight: 600; color: var(--fg); }
 .chips { display: flex; flex-wrap: wrap; gap: .375rem; }
 .chips li { padding: .2em .65em; font-family: var(--mono); font-size: .75rem; line-height: 1.4; color: #cdd3e2; border: 1px solid var(--line); border-radius: 999px; }
 .principles-line { display: grid; gap: .375rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .9375rem; line-height: 1.45; color: #cdd3e2; }
@@ -476,9 +496,7 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
       <div class="sec-head"><h2 class="label">About me</h2></div>
       <p class="statement" id="statement">I enjoy learning new things and chasing unanswered questions. I often find myself questioning the fundamental laws of the universe and wanting to understand why they are the way they are.</p>
       <div class="prose">
-        <p>I want solutions to everything, and I often end up creating my own. VIVEKA began with wanting to help one person learn English. SAGE began because I wanted to build something amazing: an AI that makes complex, repetitive, time-consuming tasks faster and runs completely locally, so it's truly a personal assistant. NeuroCube began with cubing, something I know well and like, and the wish to help people with it.</p>
-        <p>My interests span artificial intelligence, theoretical physics, mathematics and educational technology. I focus on a small number of substantial projects, and I want each one to end up finished, documented and useful to someone.</p>
-        <p>Everything here is still in progress. On this page I separate what's done from what's under way and what's only planned, so you can see exactly where each project stands.</p>
+        <p>I want solutions to everything, so I often build my own. I focus on a few substantial projects and label each one honestly: done, in progress or planned.</p>
       </div>
 
       <ul class="grid4 principles">
@@ -510,31 +528,15 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
             <h3>SAGE</h3>
             <span class="status">Active development</span>
           </div>
-          <p class="label">Self-Adaptive General Intelligence Engine · Independent project · Windows desktop</p>
-          <p class="purpose">A personal AI assistant that works as one intelligent interface between you and your computer. It's being built to understand what you want, plan it, carry out authorized actions, and verify the result. It's an ambitious engineering project, not artificial general intelligence.</p>
-          <ul class="chips" aria-label="Technology used"><li>Python</li><li>FastAPI</li><li>React</li><li>TypeScript</li><li>pywebview</li><li>WebView2</li><li>Ollama</li><li>Qwen 2.5 3B</li><li>SQLite</li><li>nomic-embed-text</li></ul>
+          <p class="label">AI · Windows desktop · Local-first</p>
+          <p class="purpose">A personal AI assistant that understands a request, carries it out with my approval, and checks that it actually worked. It's an engineering project, not artificial general intelligence.</p>
+          <ul class="chips" aria-label="Technology used"><li>Python</li><li>FastAPI</li><li>React</li><li>Ollama</li><li>SQLite</li></ul>
           <div class="split">
-            <div>
-              <p class="label">Where it stands</p>
-              <ul class="bullets">
-                <li>Phase 1, the Skills Engine, is implemented and undergoing live verification</li>
-                <li>Working skills include natural-language routing, diagnostics, volume control, and opening apps, files and approved websites</li>
-                <li>Actions need confirmation and are audited, and engineering work stopped fabricated action-success messages</li>
-                <li>Latest report: 303 automated tests passed and 28 skipped. Live verification of the latest fixes is still pending</li>
-              </ul>
-            </div>
-            <div>
-              <p class="label">What's next</p>
-              <ul class="bullets">
-                <li>Phase 1: finish stabilizing the Skills Engine</li>
-                <li>Phases 2 and 3: voice and everyday practical skills</li>
-                <li>Phases 4 and 5: diagrams and citation-backed web research</li>
-                <li>Phase 6: multi-step tasks across apps, with verified results</li>
-                <li>Phase 7: consent-based location sharing and mobile integration</li>
-              </ul>
-            </div>
+            <div><p class="label">Now</p><ul class="bullets"><li>Phase 1 built: skill routing, diagnostics, and opening apps, files and websites</li><li>Every action is confirmed and audited</li><li>320 automated tests passing, 28 skipped</li></ul></div>
+            <div><p class="label">Next</p><ul class="bullets"><li>Phase 2: local voice, planned but not started</li><li>Later: multi-step tasks, web research and mobile</li></ul></div>
           </div>
-          <p class="caution">Local-first and modular, using free, open-source tools with no paid API dependencies.</p>
+          <details class="more"><summary>Engineering decisions</summary><ul class="bullets"><li><b>Local models:</b> private and free to run</li><li><b>Speech on the CPU:</b> the 4 GB GPU is kept for the language model</li><li><b>Confirmation first:</b> a wrong action costs more than a click</li><li><b>Verified results:</b> requested is not the same as succeeded</li><li><b>Protected memory:</b> misheard speech can't become false memories</li></ul></details>
+          <details class="more"><summary>Development journal</summary><ul class="bullets"><li><b>Routing:</b> fixed inconsistent skill routing</li><li><b>False success:</b> stopped made-up success messages with execution checks</li><li><b>Files:</b> limited searches to approved folders</li><li><b>Tests:</b> 303 to 320 passing</li><li><b>Live check:</b> verified the Instagram refusal fix</li></ul></details>
           <p class="label">Runs locally for now, so there's no public link yet</p>
         </article>
 
@@ -543,38 +545,14 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
             <h3>VIVEKA</h3>
             <span class="status">Early development</span>
           </div>
-          <p class="label">Adaptive multilingual English learning · Educational technology · Entrepreneurship</p>
-          <p class="purpose">VIVEKA began with my Sanskrit teacher, Vivek, who wanted to become good at English but wasn't sure how to go about it. The app is named after him. Many people are in the same position: motivated, but without a structured path explained in a language they already understand. VIVEKA is being built to teach English through Indian regional languages, with Chinese as an additional language, and to adapt to what each learner already knows.</p>
+          <p class="label">Educational technology</p>
+          <p class="purpose">Teaches English through the learner's own language, starting with Indian regional languages. It began with my Sanskrit teacher, Vivek, and is named after him.</p>
           <p class="pull">Language should not be a barrier to learning another language.</p>
-          <div class="principles-line">
-            <p class="label">Objective</p>
-            <p>Making English education adaptive to the learner, rather than expecting every learner to adapt to the same curriculum.</p>
-          </div>
-          <ul class="chips" aria-label="Technology used"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>SQLite</li></ul>
           <div class="split">
-            <div>
-              <p class="label">Where it stands</p>
-              <ul class="bullets">
-                <li>Core objectives, proposed architecture and adaptive-learning approach are established</li>
-                <li>Project structure, development environment and backend stack are in place</li>
-                <li>Initial design of the multilingual language-support framework is done</li>
-                <li>Learner profiles, curriculum management and assessments are being planned</li>
-                <li>Foundational backend components are in development</li>
-              </ul>
-            </div>
-            <div>
-              <p class="label">What's next</p>
-              <ul class="bullets">
-                <li>A modular backend and the multilingual framework</li>
-                <li>Learner profiles that separate native, instruction and target languages</li>
-                <li>A curriculum from foundational to advanced, covering reading, writing, listening, speaking, grammar and vocabulary</li>
-                <li>Diagnostic assessments and an adaptive learning engine</li>
-                <li>An AI tutor that explains errors in the learner's preferred language</li>
-                <li>A learner-friendly frontend, then testing of educational effectiveness, language accuracy and accessibility</li>
-              </ul>
-            </div>
+            <div><p class="label">Now</p><ul class="bullets"><li>Backend foundations in Python and FastAPI</li><li>Language framework designed</li></ul></div>
+            <div><p class="label">Next</p><ul class="bullets"><li>Curriculum, diagnostic tests and adaptive lessons</li><li>An AI tutor that explains mistakes in the learner's language</li></ul></div>
           </div>
-          <p class="label">Not yet a finished or publicly deployed product</p>
+          <p class="label">Not yet a finished product</p>
         </article>
 
         <article class="card project" data-color="red" style="--pc: var(--red)">
@@ -582,52 +560,14 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
             <h3>NeuroCube</h3>
             <span class="status">Early-stage research</span>
           </div>
-          <p class="label">Founder and chief project director · Under Ignite Youth Community (IYC)</p>
-          <p class="purpose">I started NeuroCube to help people with cubing, something I know well and like. It has grown into an exploratory research initiative. We want to investigate whether structured Rubik's Cube-based activities and other cognitive-motor exercises could be complementary tools in neurological rehabilitation research, including focal hand dystonia, stroke-related motor impairments, multiple sclerosis and dementia-related challenges.</p>
-          <ul class="chips" aria-label="Areas of focus"><li>Cognitive-motor coordination</li><li>Cognitive neuroscience</li><li>Rehabilitation research</li><li>Activity design</li><li>Interdisciplinary collaboration</li></ul>
-          <div class="principles-line">
-            <p class="label">Research question</p>
-            <p>How do structured, progressively challenging Rubik's Cube-based activities engage fine-motor coordination, visuomotor integration and executive functions, and what is their potential relevance to complementary cognitive-motor rehabilitation research?</p>
+          <p class="label">Founder and chief project director · Ignite Youth Community</p>
+          <p class="purpose">I started NeuroCube to help people through cubing. We're exploring whether cube-based activities could support neurological rehabilitation research.</p>
+          <div class="split">
+            <div><p class="label">Now</p><ul class="bullets"><li>About 50 people involved</li><li>Research direction set, framework in progress</li></ul></div>
+            <div><p class="label">Next</p><ul class="bullets"><li>A literature review and testable hypotheses</li><li>Guidance from neuroscience and rehabilitation experts</li></ul></div>
           </div>
-          <div class="ledger">
-            <div>
-              <p class="label">Established</p>
-              <ul class="bullets">
-                <li>Concept</li>
-                <li>Research direction</li>
-                <li>Core research interests</li>
-                <li>Project leadership, with about 50 people involved</li>
-              </ul>
-            </div>
-            <div>
-              <p class="label">In progress</p>
-              <ul class="bullets">
-                <li>Organisational structure</li>
-                <li>Research team recruitment and restructuring</li>
-                <li>Expert collaboration</li>
-              </ul>
-            </div>
-            <div>
-              <p class="label">Not done yet</p>
-              <ul class="bullets ledger-open">
-                <li>Validated exercise framework</li>
-                <li>Experimental research</li>
-                <li>Clinical validation</li>
-                <li>Demonstrated rehabilitation outcomes</li>
-              </ul>
-            </div>
-          </div>
-          <div class="next">
-            <p class="label">What's next</p>
-            <ul class="bullets">
-              <li>A structured literature review, and specific questions with measurable hypotheses</li>
-              <li>A documented framework of progressive, adaptable activities</li>
-              <li>Guidance from neuroscientists, neurologists, occupational therapists and rehabilitation professionals</li>
-              <li>Research documentation, assessment protocols, and ethical oversight for any future human-participant research</li>
-              <li>Clear team responsibilities and a sustainable project structure</li>
-            </ul>
-          </div>
-          <p class="caution">NeuroCube's proposed activities are not clinically validated treatments, and it has not demonstrated any rehabilitation outcomes.</p>
+          <details class="more"><summary>Research question</summary><ul class="bullets"><li>How do structured, progressively challenging Rubik's Cube-based activities engage fine-motor coordination, visuomotor integration and executive functions, and what is their potential relevance to complementary cognitive-motor rehabilitation research?</li></ul></details>
+          <p class="caution">Not clinically validated, and no rehabilitation outcomes yet.</p>
         </article>
 
         <article class="card project" data-color="orange" style="--pc: var(--orange)">
@@ -635,60 +575,27 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
             <h3>Vaxaliaa</h3>
             <span class="status">Early stage</span>
           </div>
-          <p class="label">Entrepreneurship · Web development · Business strategy</p>
-          <p class="purpose">A web-design venture that helps tuition centres build a professional online presence. The goal is clean, modern, mobile-friendly websites that build trust with parents, improve visibility in online searches, generate student enquiries, and present courses, faculty, facilities and contact information professionally.</p>
+          <p class="label">Web-design venture</p>
+          <p class="purpose">Clean, mobile-friendly websites that help tuition centres earn parents' trust and get more enquiries.</p>
           <div class="split">
-            <div>
-              <p class="label">Where it stands</p>
-              <ul class="bullets">
-                <li>Identifying customer needs and building market understanding</li>
-                <li>Developing the business model and a practical service offering</li>
-                <li>No confirmed clients or completed client websites yet</li>
-              </ul>
-            </div>
-            <div>
-              <p class="label">What's next</p>
-              <ul class="bullets">
-                <li>Finalise the business model and build a demonstration website</li>
-                <li>Approach tuition centres and secure a first genuine client</li>
-                <li>Set up a repeatable delivery process, then collect client feedback and measure outcomes</li>
-                <li>Explore expanding to startups and other small businesses</li>
-              </ul>
-            </div>
+            <div><p class="label">Now</p><ul class="bullets"><li>Building the business model and service offer</li></ul></div>
+            <div><p class="label">Next</p><ul class="bullets"><li>A demonstration site, then a first real client</li></ul></div>
           </div>
-          <p class="caution">The goals above are plans, not results. I'll add client work here only once it's real and I can show evidence for it.</p>
-        </article>
+          </article>
 
         <article class="card project" data-color="yellow" style="--pc: var(--yellow)">
           <div class="project-head">
             <h3>The Mathematics of Chaos</h3>
             <span class="status planned">Planned for Grade 11</span>
           </div>
-          <p class="label">Proposed research · Theoretical physics · Nonlinear dynamics</p>
-          <p class="purpose">A theoretical investigation of nonlinear dynamics in a double pendulum. This will be a primarily theoretical physics project, built on mathematical derivations, conceptual understanding and computational analysis rather than physical experimentation.</p>
-          <ul class="chips" aria-label="Research focus"><li>Classical mechanics</li><li>Nonlinear differential equations</li><li>Mathematical modeling</li><li>Sensitivity to initial conditions</li><li>Chaos theory</li><li>Computational simulation</li></ul>
-          <div class="principles-line">
-            <p class="label">Research question</p>
-            <p>How do small variations in initial conditions influence the long-term behavior and predictability of a double pendulum, and how can mathematical modeling explain the emergence of chaotic motion?</p>
-          </div>
+          <p class="label">Proposed research · Theoretical physics</p>
+          <p class="purpose">A mostly theoretical study of why a double pendulum becomes chaotic, using mathematics and computer simulation rather than experiments.</p>
           <div class="split">
-            <div>
-              <p class="label">Where it stands</p>
-              <ul class="bullets">
-                <li>The topic and research question have been chosen</li>
-                <li>Research has not started yet</li>
-              </ul>
-            </div>
-            <div>
-              <p class="label">What's planned</p>
-              <ul class="bullets">
-                <li>Work through the mechanics and mathematics of the double pendulum</li>
-                <li>Model its motion with nonlinear differential equations</li>
-                <li>Use computational simulations to study sensitivity to initial conditions</li>
-              </ul>
-            </div>
+            <div><p class="label">Now</p><ul class="bullets"><li>Topic and research question chosen</li><li>Research has not started</li></ul></div>
+            <div><p class="label">Next</p><ul class="bullets"><li>Model the motion with nonlinear equations</li><li>Simulate how tiny changes in starting conditions grow</li></ul></div>
           </div>
-        </article>
+          <details class="more"><summary>Research question</summary><ul class="bullets"><li>How do small variations in initial conditions influence the long-term behavior and predictability of a double pendulum, and how can mathematical modeling explain the emergence of chaotic motion?</li></ul></details>
+          </article>
       </div>
     </div>
   </section>
@@ -699,12 +606,12 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         <p class="label">Academics</p>
         <h2>Academics come first.</h2>
       </div>
-      <p class="academics-copy">Projects can't replace the mathematics and science I need. My earlier results showed real weaknesses in mathematics and numerical accuracy. I've made progress since then, and I'm still strengthening my fundamentals.</p>
+      <p class="academics-copy">My early maths results were weak. I've improved since, and I'm still strengthening my fundamentals.</p>
       <ul class="grid2">
-        <li class="card tile reveal"><h3>Mathematics</h3><p>Algebra, trigonometry and functions, moving toward calculus and linear algebra.</p></li>
-        <li class="card tile reveal"><h3>Physics</h3><p>Mechanics, electricity and magnetism, waves and modern physics, with close attention to numerical accuracy.</p></li>
-        <li class="card tile reveal"><h3>Chemistry</h3><p>Reactions, nomenclature, formula application and numerical problem-solving.</p></li>
-        <li class="card tile reveal"><h3>English and communication</h3><p>Academic writing, scientific documentation and explaining complex ideas clearly.</p></li>
+        <li class="card tile reveal"><h3>Mathematics</h3><p>Algebra and functions, heading toward calculus.</p></li>
+        <li class="card tile reveal"><h3>Physics</h3><p>Mechanics to modern physics, with care for accuracy.</p></li>
+        <li class="card tile reveal"><h3>Chemistry</h3><p>Reactions, formulas and problem-solving.</p></li>
+        <li class="card tile reveal"><h3>English and communication</h3><p>Clear writing about complex ideas.</p></li>
       </ul>
     </div>
   </section>
@@ -736,18 +643,18 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         <ol class="plan-track" id="plan-track">
           <li class="card stage now">
             <div class="stage-head"><h3>Grade 10</h3><span class="label">Now · Foundation</span></div>
-            <div class="track"><p class="label">Academic</p><p>Improve in mathematics and science, keep a consistent study routine, and build the mathematics needed for my Grade 11 research.</p></div>
-            <div class="track"><p class="label">Beyond academics</p><p>Get SAGE working reliably, build VIVEKA's core features, and strengthen NeuroCube's research framework.</p></div>
+            <div class="track"><p class="label">Academic</p><p>Strengthen maths and science, and build toward my Grade 11 research.</p></div>
+            <div class="track"><p class="label">Beyond academics</p><p>Make SAGE reliable, build VIVEKA's core and shape NeuroCube's research.</p></div>
           </li>
           <li class="card stage">
             <div class="stage-head"><h3>Grade 11</h3><span class="label">Research and expansion</span></div>
-            <div class="track"><p class="label">Academic</p><p>Start the double pendulum research project, ideally with an academic mentor, and enter competitions that suit my preparation.</p></div>
-            <div class="track"><p class="label">Beyond academics</p><p>Test SAGE in real-world use, pilot VIVEKA with actual learners, pursue supervised research through NeuroCube, and finalise Vaxaliaa's business model and demonstration website.</p></div>
+            <div class="track"><p class="label">Academic</p><p>Start the double pendulum research and suitable competitions.</p></div>
+            <div class="track"><p class="label">Beyond academics</p><p>Test SAGE for real, pilot VIVEKA, begin supervised NeuroCube research and finalise Vaxaliaa.</p></div>
           </li>
           <li class="card stage">
             <div class="stage-head"><h3>Grade 12</h3><span class="label">Consolidation</span></div>
-            <div class="track"><p class="label">Academic</p><p>Consolidate my research findings and complete my university applications.</p></div>
-            <div class="track"><p class="label">Beyond academics</p><p>Document my main technical work, show measurable educational or community impact, and secure Vaxaliaa's first genuine client.</p></div>
+            <div class="track"><p class="label">Academic</p><p>Write up my research and complete university applications.</p></div>
+            <div class="track"><p class="label">Beyond academics</p><p>Document my work, show real impact and land Vaxaliaa's first client.</p></div>
           </li>
           <li class="card stage">
             <div class="stage-head"><h3>Long term</h3></div>
@@ -1442,6 +1349,14 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
     ScrollTrigger.addEventListener('refresh', function () { if (remeasure) remeasure(); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
   }
+
+  /* Opening a details panel changes the page height, so the scroll story re-measures */
+  all('details.more').forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (hasGsap && !calm) ScrollTrigger.refresh();
+      else if (remeasure) remeasure();
+    });
+  });
 
   var queued = false;
   addEventListener('scroll', function () {
