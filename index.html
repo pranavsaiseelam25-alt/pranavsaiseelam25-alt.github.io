@@ -322,6 +322,26 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
   }
 }
 
+/* Recognition: a short dated list */
+.recog { display: grid; gap: .75rem; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.recog ul { display: grid; }
+.recog li {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) auto;
+  gap: .25rem 1.5rem;
+  align-items: baseline;
+  padding-block: .875rem;
+  border-top: 1px solid var(--line);
+}
+.recog li:last-child { border-bottom: 1px solid var(--line); }
+.recog-when { font-family: var(--mono); font-size: .8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.recog-what { font-weight: 500; }
+.recog-note { font-size: .9375rem; color: var(--muted); text-align: right; }
+@media (max-width: 640px) {
+  .recog li { grid-template-columns: minmax(0, 1fr); }
+  .recog-note { text-align: left; }
+}
+
 /* Numbers */
 .num { font-size: clamp(3rem, 6vw, 4.75rem); font-weight: 500; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
 .numbers .tile p:not(.num) { color: var(--muted); font-size: .9375rem; line-height: 1.4; }
@@ -673,6 +693,16 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         <li class="card tile reveal"><h3>Volleyball</h3><p>A sport I keep playing simply because I enjoy it.</p></li>
         <li class="card tile reveal"><h3>Astronomy and physics</h3><p>I explore astronomy, astrophysics and theoretical physics on my own, outside of class.</p></li>
       </ul>
+      <div class="recog reveal">
+        <p class="label">Recognition</p>
+        <ul>
+          <li><span class="recog-when">Jan 2026</span><span class="recog-what">Pravega IISc BLR Cube Open</span><span class="recog-note">WCA competition, Indian Institute of Science</span></li>
+          <li><span class="recog-when">Apr 2026</span><span class="recog-what">Karnataka Cube Open</span><span class="recog-note">WCA competition, Presidency University</span></li>
+          <li><span class="recog-when">Jun 2026</span><span class="recog-what">Indian Cube Challenge BLR</span><span class="recog-note">WCA competition</span></li>
+          <li><span class="recog-when">Jul 2026</span><span class="recog-what">VMUN 5.0</span><span class="recog-note">Delegate, Vydehi School of Excellence</span></li>
+          <li><span class="recog-when">2025–26</span><span class="recog-what">Inter-House Volleyball</span><span class="recog-note">Third place</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
