@@ -412,6 +412,10 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .chips { display: flex; flex-wrap: wrap; gap: .375rem; }
 .chips li { padding: .2em .65em; font-family: var(--mono); font-size: .75rem; line-height: 1.4; color: #cdd3e2; border: 1px solid var(--line); border-radius: 999px; }
 .principles-line { display: grid; gap: .375rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .9375rem; line-height: 1.45; color: #cdd3e2; }
+.cta { display: flex; flex-wrap: wrap; align-items: baseline; gap: .375rem .75rem; padding: .875rem 1rem; font-size: .9375rem; line-height: 1.5; color: #d7dcea; border: 1px solid color-mix(in srgb, var(--pc) 40%, transparent); border-radius: 12px; background: color-mix(in srgb, var(--pc) 8%, transparent); }
+.cta-label { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--pc); }
+.cta a { color: var(--fg); font-weight: 500; text-decoration-color: var(--pc); }
+.cta a::after { content: " →"; }
 .caution { font-size: .9375rem; color: var(--muted); padding-top: 1rem; border-top: 1px solid var(--line); }
 
 /* Academics */
@@ -633,6 +637,7 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
             <div><p class="label">Next</p><ul class="bullets"><li>A literature review and testable hypotheses</li><li>Guidance from neuroscience and rehabilitation experts</li></ul></div>
           </div>
           <details class="more"><summary>Research question</summary><ul class="bullets"><li>How do structured, progressively challenging Rubik's Cube-based activities engage fine-motor coordination, visuomotor integration and executive functions, and what is their potential relevance to complementary cognitive-motor rehabilitation research?</li></ul></details>
+          <p class="cta"><span class="cta-label">Get involved</span>NeuroCube is looking for mentors, neuroscience and rehabilitation experts, and volunteers. <a href="mailto:pranavsaiseelam.25@gmail.com?subject=NeuroCube">Reach out</a></p>
           <p class="caution">Not clinically validated, and no rehabilitation outcomes yet.</p>
         </article>
 
