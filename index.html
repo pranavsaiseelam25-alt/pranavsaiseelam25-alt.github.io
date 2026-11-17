@@ -274,7 +274,7 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
 .tile p { color: var(--muted); }
 .principles { margin-top: clamp(3rem, 6vw, 4.5rem); }
 
-.statement, .prose, .academics-copy, .thesis, .sec-head, .contact-list { text-shadow: 0 1px 14px rgba(4, 5, 12, .85), 0 0 2px rgba(4, 5, 12, .6); }
+.statement, .prose, .academics-copy, .thesis, .sec-head, .contact-list, .vision-line, .vision-sub { text-shadow: 0 1px 14px rgba(4, 5, 12, .85), 0 0 2px rgba(4, 5, 12, .6); }
 
 /* Gallery: a fixed collage on wide screens, a simpler stack on phones */
 .gallery {
@@ -341,6 +341,13 @@ h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.015em; }
   .recog li { grid-template-columns: minmax(0, 1fr); }
   .recog-note { text-align: left; }
 }
+
+/* Vision: the opening statement of purpose */
+.vision { padding-block: clamp(4rem, 9vw, 7rem) 0; }
+.vision-line { max-width: 36rem; font-size: clamp(1.625rem, 4vw, 3.25rem); hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word; font-weight: 600; line-height: 1.1; letter-spacing: -.035em; text-wrap: balance; }
+.vision-sub { max-width: 40rem; margin-top: 1.25rem; font-size: clamp(1.0625rem, 1.6vw, 1.25rem); color: #cdd3e2; }
+#recognition .recog { margin-top: 0; }
+#vision, #recognition { scroll-margin-top: 3rem; }
 
 /* Numbers */
 .num { font-size: clamp(3rem, 6vw, 4.75rem); font-weight: 500; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
@@ -518,6 +525,7 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
     <nav aria-label="Sections">
       <ul>
         <li><a href="#about">About</a></li>
+        <li><a href="#recognition">Recognition</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#academics">Academics</a></li>
         <li><a href="#beyond">Beyond school</a></li>
@@ -547,7 +555,7 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
     <dl class="facts">
       <div><dt class="label">Currently in</dt><dd>Grade 10</dd></div>
       <div><dt class="label">School</dt><dd>National Public School Whitefield</dd></div>
-      <div><dt class="label">Based in</dt><dd>Bangalore, India</dd></div>
+      <div><dt class="label">Based in</dt><dd>Whitefield, Bangalore, India</dd></div>
       <div><dt class="label">Role</dt><dd>Founder and chief project director, NeuroCube</dd></div>
     </dl>
   </div>
@@ -561,6 +569,14 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
 </div>
 
 <main>
+  <section class="sec vision" id="vision">
+    <div class="wrap">
+      <div class="sec-head"><p class="label">Vision</p></div>
+      <p class="vision-line">To combine science, engineering, entrepreneurship and independent research to solve meaningful problems.</p>
+      <p class="vision-sub">This portfolio shows the work I'm doing toward that goal, labelled honestly as done, in progress or planned.</p>
+    </div>
+  </section>
+
   <section class="sec" id="about">
     <div class="wrap">
       <div class="sec-head"><h2 class="label">About me</h2></div>
@@ -575,6 +591,24 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         <li class="card tile reveal"><h3>Intellectual honesty</h3><p>I don't exaggerate findings, contributions or impact.</p></li>
         <li class="card tile reveal"><h3>Measurable impact</h3><p>I check whether a project really helps people.</p></li>
       </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="recognition" style="padding-top: 0">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Certifications and recognition</p>
+        <h2>Where I've competed and taken part.</h2>
+      </div>
+      <div class="recog reveal">
+        <ul>
+          <li><span class="recog-when">Jan 2026</span><span class="recog-what">Pravega IISc BLR Cube Open</span><span class="recog-note">WCA competition, Indian Institute of Science</span></li>
+          <li><span class="recog-when">Apr 2026</span><span class="recog-what">Karnataka Cube Open</span><span class="recog-note">WCA competition, Presidency University</span></li>
+          <li><span class="recog-when">Jun 2026</span><span class="recog-what">Indian Cube Challenge BLR</span><span class="recog-note">WCA competition</span></li>
+          <li><span class="recog-when">Jul 2026</span><span class="recog-what">VMUN 5.0</span><span class="recog-note">Delegate, Vydehi School of Excellence</span></li>
+          <li><span class="recog-when">2025–26</span><span class="recog-what">Inter-House Volleyball</span><span class="recog-note">Third place</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -698,16 +732,6 @@ footer .wrap { display: grid; gap: 1.5rem; padding-block: 2.5rem 1.5rem; }
         <li class="card tile reveal"><h3>Volleyball</h3><p>A sport I keep playing simply because I enjoy it.</p></li>
         <li class="card tile reveal"><h3>Astronomy and physics</h3><p>I explore astronomy, astrophysics and theoretical physics on my own, outside of class.</p></li>
       </ul>
-      <div class="recog reveal">
-        <p class="label">Recognition</p>
-        <ul>
-          <li><span class="recog-when">Jan 2026</span><span class="recog-what">Pravega IISc BLR Cube Open</span><span class="recog-note">WCA competition, Indian Institute of Science</span></li>
-          <li><span class="recog-when">Apr 2026</span><span class="recog-what">Karnataka Cube Open</span><span class="recog-note">WCA competition, Presidency University</span></li>
-          <li><span class="recog-when">Jun 2026</span><span class="recog-what">Indian Cube Challenge BLR</span><span class="recog-note">WCA competition</span></li>
-          <li><span class="recog-when">Jul 2026</span><span class="recog-what">VMUN 5.0</span><span class="recog-note">Delegate, Vydehi School of Excellence</span></li>
-          <li><span class="recog-when">2025–26</span><span class="recog-what">Inter-House Volleyball</span><span class="recog-note">Third place</span></li>
-        </ul>
-      </div>
     </div>
   </section>
 
